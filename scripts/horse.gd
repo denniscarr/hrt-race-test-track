@@ -105,6 +105,17 @@ func stop_moving():
 	velocity.y = 0
 
 
+func get_direction_degrees(horse: Horse):
+	var direction_vector: Vector2 = horse.global_position - global_position
+	return rad_to_deg(atan2(direction_vector.y, direction_vector.x))
+
+
+func set_direction_degrees(degrees: float):
+	var radians := SGFixed.deg_to_rad(SGFixed.ONE * degrees)
+	velocity = velocity.rotated(radians)
+	_view.set_look_direction(velocity)
+
+
 ## Gives the horse a completely random direction
 func randomize_direction():
 	var randomness := SGFixed.deg_to_rad(SGFixed.ONE * 360)
