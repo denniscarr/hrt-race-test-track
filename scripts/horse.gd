@@ -186,10 +186,12 @@ func _get_start_dir() -> SGFixedVector2:
 
 func recalculate_speed():
 	_fixed_move_speed = _horse_data.base_speed + _speed_increases * horse_data.speed_increase_amount
+	if BetManager.gold_rush:
+		var _fixed_gold_multiplier: int = SGFixed.from_float(3.0)
+		_fixed_move_speed = SGFixed.mul(_fixed_move_speed, _fixed_gold_multiplier)
 	_fixed_move_speed = SGFixed.mul(_fixed_move_speed, _fixed_speed_multiplier)
 	_fixed_move_speed = (
-		SGFixed
-		. mul(
+		SGFixed.mul(
 			_fixed_move_speed,
 			BetManager.ribbon_manager.get_ribbon_fixed_speed_multiplier(_horse_data.name_abrev),
 		)
@@ -218,7 +220,7 @@ func _set_speed_multiplier(mult: int):
 	_fixed_speed_multiplier = mult
 	recalculate_speed()
 
+
 func get_current_speed() -> float:
 	#return _fixed_move_speed / SGFixed.ONE
 	return SGFixed.to_float(_fixed_move_speed)
-	
