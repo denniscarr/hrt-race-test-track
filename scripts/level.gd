@@ -111,6 +111,7 @@ func _process(delta: float):
 func initialize(horse_datas: Array[HorseData]):
 	_spawn_horses(horse_datas)
 	_collision_manager.generate_collision(_wall_sprite.texture)
+	BetEventBus.level_initialized.emit()
 
 
 ## Starts the pre-race countdown
@@ -133,6 +134,8 @@ func start_race():
 
 	for horse: Horse in _horses:
 		horse.start_moving()
+
+	BetEventBus.race_started.emit()
 
 
 func start_victory():
