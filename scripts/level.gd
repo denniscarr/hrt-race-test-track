@@ -128,8 +128,8 @@ func start_race():
 	$LevelText.show()
 
 	_gate_holder.visible = false
-	
-	BetManager.choice_zone = 0
+
+	BetManager.random_zone = 0
 
 	for horse: Horse in _horses:
 		horse.start_moving()
