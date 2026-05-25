@@ -1,18 +1,30 @@
 ## Controller for an individual level/course
-class_name Level
+class_name RaceTrack
 extends SGFixedNode2D
+
+## Emitted when a horse grabs a goal, ending the race and triggering the victory sequence.
+signal goal_grabbed(horse: Horse)
 
 ## Emitted when the race sequence is completely finished and the game is ready to move on
 signal race_over(winning_horse: HorseData)
 
+signal horse_hit_horse(horse_a: Horse, horse_b: Horse)
+
+signal horse_hit_wall(horse: Horse)
+
 enum State { IDLE, COUNTDOWN, RACE, VICTORY }
+
+@export_category("Packed Scenes")
+
+## Add a reference to the packed scene used to instantiate all horses
+@export var _horse_packed_scene: PackedScene
 
 @export_category("Tweakables")
 
 ## How long the initial countdown takes
 @export var _countdown_duration: float = 20.0
 
-@export_category("Node References")
+@export_category("Internal Node References")
 
 ## Parent spawn points to this. Spawn points should just be plain old Node2Ds that are used as
 ## position references when spawning the horses.
@@ -39,11 +51,6 @@ enum State { IDLE, COUNTDOWN, RACE, VICTORY }
 
 @export var _collision_manager: LevelCollision
 
-@export_category("Packed Scenes")
-
-## Add a reference to the packed scene used to instantiate all horses
-@export var _horse_packed_scene: PackedScene
-
 var current_state: State:
 	get:
 		return _current_state
@@ -52,17 +59,18 @@ var horses: Array[Horse]:
 	get:
 		return _horses
 
+## A reference to the winning horse. Assigned when a horse grabs the goal.
+var winning_horse: Horse:
+	get:
+		return _winning_horse
+
 var victory_image: VictoryImage:
 	get:
 		return _victory_image
 
-var race_paused: bool:
+var paused: bool:
 	get:
-		return _race_paused
-
-var goal: Goal:
-	get:
-		return _goal
+		return _paused
 
 ## The overall timescale that should be used by all gameplay objects
 var time_scale: int:
@@ -70,19 +78,22 @@ var time_scale: int:
 		# If there are ever other things that affect time scale, we can factor them in here
 		return _fixed_qte_time_scale
 
+var goals: Array[Goal]:
+	get:
+		return _goals
+
 ## Cached references to all the horses in the level
 var _horses: Array[Horse]
 
-## A reference to the winning horse. Assigned when a horse grabs the goal.
 var _winning_horse: Horse
 
-var _race_paused: bool
+var _paused: bool
 
 var _horse_by_name: Dictionary[String, Horse]
 
-var _goal: Goal
+var _goals: Array[Goal]
 
-## Time scale to be applied to all gameplay stuff during the QTE slow-mo
+## Time scale to be applied to all gameplay stuff. Meant to be used during QTEs or hitpause.
 var _fixed_qte_time_scale: int = SGFixed.ONE
 
 var _current_state: State = State.IDLE
@@ -91,27 +102,69 @@ var _current_state: State = State.IDLE
 func _ready():
 	$LevelText.visible = false
 
-	# Connect up so we recognize when a horse has reached the goal
-	for i: int in range(_goal_holder.get_child_count()):
-		var child := _goal_holder.get_child(i)
-		if child is Goal:
-			_goal = child as Goal
-			goal.grabbed_by_horse.connect(_on_goal_grabbed_by_horse)
-
-	_countdown_timer.countdown_finished.connect(start_race)
-	_victory_image.image_shown.connect(_on_victory_image_image_shown)
-
 
 # Here to be overridden
 func _process(delta: float):
 	pass
 
 
-## Initializes level. Call this right after instantiating it.
+## Deletes all Goal nodes in the race track and replaces them with instances of
+## [override_scene]. Call this before [initialize].[br]
+## [override_scene]'s root script must extend Goal.
+func apply_goal_override(override_scene: PackedScene):
+	for i: int in range(_goal_holder.get_child_count()):
+		var child := _goal_holder.get_child(i)
+		if not (child is Goal):
+			continue
+		var old_goal := child as Goal
+
+		var override := override_scene.instantiate()
+		if not (override is Goal):
+			push_error("apply_goal_override only works with scenes that extend Goal.")
+			return
+		var new_goal := override as Goal
+
+		old_goal.get_parent().add_child(new_goal)
+		new_goal.fixed_position = old_goal.fixed_position
+
+		old_goal.get_parent().remove_child(old_goal)
+		old_goal.queue_free()
+
+
+## Deletes the CountdownTimer node in the race track and replaces it with an instance of
+## [override_scene]. Call this before [initialize].[br]
+## [override_scene]'s root script must extend CountdownTimer.
+func apply_countdown_timer_override(override_scene: PackedScene):
+	var override := override_scene.instantiate()
+	if not (override is CountdownTimer):
+		push_error("apply_countdown_timer_override only works with scenes that extend CountdownTimer")
+		return
+
+	var new_timer := override as CountdownTimer
+	var old_timer := _countdown_timer
+
+	old_timer.get_parent().add_child(new_timer)
+	old_timer.get_parent().remove_child(old_timer)
+	old_timer.queue_free()
+
+	_countdown_timer = new_timer
+
+
+## Initializes level. Call this after any override functions.
 func initialize(horse_datas: Array[HorseData]):
 	_spawn_horses(horse_datas)
 	_collision_manager.generate_collision(_wall_sprite.texture)
-	BetEventBus.level_initialized.emit()
+
+	# Connect up so we recognize when a horse has reached the goal
+	for i: int in range(_goal_holder.get_child_count()):
+		var child := _goal_holder.get_child(i)
+		if child is Goal:
+			var goal = child as Goal
+			goal.grabbed_by_horse.connect(_on_goal_grabbed_by_horse)
+			_goals.push_back(goal)
+
+	_countdown_timer.countdown_finished.connect(start_race)
+	_victory_image.image_shown.connect(_on_victory_image_image_shown)
 
 
 ## Starts the pre-race countdown
@@ -130,27 +183,12 @@ func start_race():
 
 	_gate_holder.visible = false
 
-	BetManager.random_zone = 0
-
 	for horse: Horse in _horses:
 		horse.start_moving()
 
-	BetEventBus.race_started.emit()
 
-
-func start_victory():
-	_current_state = State.VICTORY
-
-	$AudioStreamPlayer2D.stop()
-
-	for horse: Horse in _horses:
-		horse.stop_moving()
-
-	_do_win_animation()
-
-
-func toggle_race_paused(p_paused: bool):
-	_race_paused = p_paused
+func set_paused(p_paused: bool):
+	_paused = p_paused
 	$RaceClock.start_counting = !p_paused
 	$AudioStreamPlayer2D.stream_paused = p_paused
 	for horse: Horse in _horses:
@@ -203,6 +241,17 @@ func _spawn_horses(horse_datas: Array[HorseData]):
 		new_horse.hit_wall.connect(_on_horse_hit_wall)
 
 
+func _start_victory():
+	_current_state = State.VICTORY
+
+	$AudioStreamPlayer2D.stop()
+
+	for horse: Horse in _horses:
+		horse.stop_moving()
+
+	_do_win_animation()
+
+
 ## Does the animation for when a horse has won the race
 func _do_win_animation():
 	await get_tree().create_timer(1.5).timeout
@@ -227,8 +276,8 @@ func _on_goal_grabbed_by_horse(horse: Horse):
 	$AudioStreamPlayer2D.stream = horse.horse_data.victory_theme
 	$AudioStreamPlayer2D.play()
 	horse.win()
-
-	start_victory()
+	goal_grabbed.emit(horse)
+	_start_victory()
 
 
 func _on_victory_image_image_shown():
@@ -236,11 +285,9 @@ func _on_victory_image_image_shown():
 	race_over.emit(_winning_horse.horse_data)
 
 
-# Here to be overridden
 func _on_horse_hit_horse(horse_a: Horse, horse_b: Horse):
-	pass
+	horse_hit_horse.emit(horse_a, horse_b)
 
 
-# Here to be overridden
 func _on_horse_hit_wall(horse: Horse):
-	pass
+	horse_hit_wall.emit(horse)

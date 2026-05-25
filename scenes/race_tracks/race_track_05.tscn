@@ -1,10 +1,10 @@
 [gd_scene format=3 uid="uid://djymnstqi1oti"]
 
-[ext_resource type="PackedScene" uid="uid://dpk7vdlwd671d" path="res://hrt_race/scenes/levels/lvl_base.tscn" id="1_suqsp"]
-[ext_resource type="Shader" uid="uid://661o74uwcvb4" path="res://hrt_race/shaders/mask.gdshader" id="2_ylsdf"]
-[ext_resource type="Texture2D" uid="uid://j0wixjenqvte" path="res://hrt_race/sprites/levels/map005a.png" id="3_suqsp"]
-[ext_resource type="Texture2D" uid="uid://xqg8yx4vkf03" path="res://hrt_race/sprites/ui/screen_transition_mask_02.png" id="4_fts15"]
-[ext_resource type="AudioStream" uid="uid://bndtyp6dr8ot5" path="res://hrt_race/audio/music/anibal/horse_epic.wav" id="5_qtsb0"]
+[ext_resource type="PackedScene" uid="uid://dpk7vdlwd671d" path="res://hrt_race/scenes/race_tracks/race_track_base.tscn" id="1_ac8mf"]
+[ext_resource type="Shader" uid="uid://661o74uwcvb4" path="res://hrt_race/shaders/mask.gdshader" id="2_hcxjm"]
+[ext_resource type="Texture2D" uid="uid://xqg8yx4vkf03" path="res://hrt_race/sprites/ui/screen_transition_mask_02.png" id="3_huko1"]
+[ext_resource type="Texture2D" uid="uid://j0wixjenqvte" path="res://hrt_race/sprites/levels/map005a.png" id="4_qq3e7"]
+[ext_resource type="AudioStream" uid="uid://bndtyp6dr8ot5" path="res://hrt_race/audio/music/anibal/horse_epic.wav" id="5_mekg3"]
 
 [sub_resource type="Gradient" id="Gradient_sfmk3"]
 colors = PackedColorArray(0, 0.6389547, 0, 1, 0.75348955, 0.7361483, 0.64791125, 1)
@@ -14,9 +14,9 @@ gradient = SubResource("Gradient_sfmk3")
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_451aa"]
 resource_local_to_scene = true
-shader = ExtResource("2_ylsdf")
+shader = ExtResource("2_hcxjm")
 shader_parameter/alpha_test_cutoff = 1.0
-shader_parameter/alpha_test = ExtResource("4_fts15")
+shader_parameter/alpha_test = ExtResource("3_huko1")
 shader_parameter/mask = SubResource("GradientTexture2D_654ak")
 
 [sub_resource type="Gradient" id="Gradient_v45ci"]
@@ -32,11 +32,11 @@ colors = PackedColorArray(0.14767182, 0.14767179, 0.14767179, 1, 1, 1, 1, 1)
 gradient = SubResource("Gradient_48ne7")
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_suqsp"]
-shader = ExtResource("2_ylsdf")
+shader = ExtResource("2_hcxjm")
 shader_parameter/alpha_test_cutoff = 0.5
 shader_parameter/mask = SubResource("GradientTexture2D_6xh4u")
 
-[node name="Level5" unique_id=559478777 instance=ExtResource("1_suqsp")]
+[node name="RaceTrack05" unique_id=559478777 instance=ExtResource("1_ac8mf")]
 
 [node name="Background" parent="." index="1" unique_id=1994129123]
 material = SubResource("ShaderMaterial_451aa")
@@ -44,7 +44,7 @@ texture = SubResource("GradientTexture2D_48ne7")
 
 [node name="WallSprite" parent="." index="2" unique_id=1549821729]
 material = SubResource("ShaderMaterial_suqsp")
-texture = ExtResource("3_suqsp")
+texture = ExtResource("4_qq3e7")
 
 [node name="Node2D" type="SGFixedNode2D" parent="SpawnPoints" parent_id_path=PackedInt32Array(1788382203) index="0" unique_id=1343179426]
 fixed_position_x = -13959168
@@ -91,7 +91,7 @@ fixed_position_y = 65536
 position = Vector2(-34, 1)
 
 [node name="AudioStreamPlayer2D" parent="." index="8" unique_id=1623793595]
-stream = ExtResource("5_qtsb0")
+stream = ExtResource("5_mekg3")
 
 [node name="LevelText" parent="." index="11" unique_id=2140136208]
 offset_left = 279.0

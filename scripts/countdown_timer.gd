@@ -38,13 +38,6 @@ func _ready():
 	_bouncing_body.visible = false
 
 
-func _input(event):
-	if BetManager.derby_manager.derby_started && \
-	BetManager.current_level.current_state == Level.State.COUNTDOWN && \
-	event.is_action_pressed("skip_countdown"):
-		_finish_countdown()
-
-
 func _process(delta: float):
 	_fsm_controller.process_tick(delta)
 
@@ -62,6 +55,15 @@ func start_countdown(countdown_time: float):
 	_bouncing_body.velocity = Vector2.RIGHT.rotated(randf_range(0, PI * 2)) * _speed
 
 
+## Finishes the countdown and hides the timer.[br]
+## Can be called early intentionally to skip to the end of the countdown and emit
+## [countdown_finished].
+func finish_countdown():
+	_bouncing_body.visible = false
+	countdown_finished.emit()
+	_fsm_controller.switch_state("idle")
+
+
 func _physics_process(_delta: float):
 	var collision = _bouncing_body.move_and_collide(_bouncing_body.velocity)
 	if collision:
@@ -71,7 +73,7 @@ func _physics_process(_delta: float):
 
 func _go_to_next_phase():
 	if _phase_index >= _num_phases:
-		_finish_countdown()
+		finish_countdown()
 		return
 
 	# Create a new state for the next phase and switch to it
@@ -80,12 +82,6 @@ func _go_to_next_phase():
 	_fsm_controller.switch_state(key)
 
 	_phase_index += 1
-
-
-func _finish_countdown():
-	_bouncing_body.visible = false
-	countdown_finished.emit()
-	_fsm_controller.switch_state("idle")
 
 
 func _define_countdown_state(index: int):

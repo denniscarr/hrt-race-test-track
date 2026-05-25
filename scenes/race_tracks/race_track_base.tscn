@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://dpk7vdlwd671d"]
 
-[ext_resource type="Script" uid="uid://ctb0b1cq8ri4u" path="res://hrt_race/scripts/level.gd" id="1_2q6dc"]
+[ext_resource type="Script" uid="uid://ctb0b1cq8ri4u" path="res://hrt_race/scripts/race_track.gd" id="1_2q6dc"]
 [ext_resource type="PackedScene" uid="uid://cicnqui6nlmmy" path="res://hrt_race/scenes/race_objects/horse.tscn" id="2_3rriw"]
 [ext_resource type="Texture2D" uid="uid://caybj1rfu4v3u" path="res://hrt_race/sprites/general/gate.png" id="2_ukglk"]
 [ext_resource type="Script" uid="uid://chqsh41u8wvhc" path="res://scripts/gameplay/clash_manager.gd" id="3_575cj"]
@@ -20,7 +20,7 @@ shader = ExtResource("6_h4ce7")
 shader_parameter/alpha_test_cutoff = 1.0
 shader_parameter/alpha_test = ExtResource("7_53c65")
 
-[node name="Level" type="SGFixedNode2D" unique_id=476603249 node_paths=PackedStringArray("_spawn_point_holder", "_gate_holder", "_goal_holder", "_wall_sprite", "_countdown_timer", "_victory_image", "_fixed_tweener", "_collision_manager")]
+[node name="RaceTrack" type="SGFixedNode2D" unique_id=476603249 node_paths=PackedStringArray("_spawn_point_holder", "_gate_holder", "_goal_holder", "_wall_sprite", "_countdown_timer", "_victory_image", "_fixed_tweener", "_collision_manager")]
 editor_description = "Base scene for all levels"
 script = ExtResource("1_2q6dc")
 _spawn_point_holder = NodePath("SpawnPoints")

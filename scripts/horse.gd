@@ -110,10 +110,17 @@ func get_direction_degrees(horse: Horse):
 	return rad_to_deg(atan2(direction_vector.y, direction_vector.x))
 
 
-func set_direction_degrees(degrees: float):
-	var radians := SGFixed.deg_to_rad(SGFixed.ONE * degrees)
+func set_direction(fixed_degrees: int):
+	var radians := SGFixed.deg_to_rad(fixed_degrees)
 	velocity = velocity.rotated(radians)
 	_view.set_look_direction(velocity)
+
+
+## Note that using this will break determinism. If you want to keep it, use [set_direction] with a
+## pre-calculated fixed point number.
+func set_direction_lossy(degrees: float):
+	var fixed_degrees: int = SGFixed.ONE * degrees
+	set_direction(fixed_degrees)
 
 
 ## Gives the horse a completely random direction
@@ -142,6 +149,21 @@ func increment_speed_multiplier(fixed_amount: int):
 	# 6554 = 0.1 in fixed
 	_fixed_speed_multiplier = max(_fixed_speed_multiplier + fixed_amount, 6554)
 	recalculate_speed()
+
+
+## Recalculates and immediately updates the horse's speed to match its current state.
+func recalculate_speed():
+	_fixed_move_speed = _get_move_speed()
+	velocity = velocity.normalized()
+	velocity.imul(_fixed_move_speed)
+
+
+func get_current_speed() -> int:
+	return velocity.length()
+
+
+func get_current_speed_lossy() -> float:
+	return SGFixed.to_float(velocity.length())
 
 
 ## Called when the horse collides with something to make it bounce in another direction
@@ -184,22 +206,6 @@ func _get_start_dir() -> SGFixedVector2:
 	return start_dir
 
 
-func recalculate_speed():
-	_fixed_move_speed = _horse_data.base_speed + _speed_increases * horse_data.speed_increase_amount
-	if BetManager.gold_rush:
-		var _fixed_gold_multiplier: int = SGFixed.from_float(3.0)
-		_fixed_move_speed = SGFixed.mul(_fixed_move_speed, _fixed_gold_multiplier)
-	_fixed_move_speed = SGFixed.mul(_fixed_move_speed, _fixed_speed_multiplier)
-	_fixed_move_speed = (
-		SGFixed.mul(
-			_fixed_move_speed,
-			BetManager.ribbon_manager.get_ribbon_fixed_speed_multiplier(_horse_data.name_abrev),
-		)
-	)
-	velocity = velocity.normalized()
-	velocity.imul(_fixed_move_speed)
-
-
 ## Checks the specified collision is with another horse and if so registers it with the BetEventBus
 func _check_horse_collision(p_collision: SGKinematicCollision2D):
 	var collider = p_collision.get_collider()
@@ -221,6 +227,8 @@ func _set_speed_multiplier(mult: int):
 	recalculate_speed()
 
 
-func get_current_speed() -> float:
-	#return _fixed_move_speed / SGFixed.ONE
-	return SGFixed.to_float(_fixed_move_speed)
+## Calculates the speed the horse should move at based on its current state
+func _get_move_speed() -> int:
+	var fixed_speed := _horse_data.base_speed + _speed_increases * horse_data.speed_increase_amount
+	fixed_speed = SGFixed.mul(fixed_speed, _fixed_speed_multiplier)
+	return fixed_speed

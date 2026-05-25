@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://cn3ix5dyuhbn3"]
 
-[ext_resource type="PackedScene" uid="uid://dpk7vdlwd671d" path="res://hrt_race/scenes/levels/lvl_base.tscn" id="1_oxioo"]
+[ext_resource type="PackedScene" uid="uid://dpk7vdlwd671d" path="res://hrt_race/scenes/race_tracks/race_track_base.tscn" id="1_oxioo"]
 [ext_resource type="Shader" uid="uid://661o74uwcvb4" path="res://hrt_race/shaders/mask.gdshader" id="2_xfm38"]
 [ext_resource type="Texture2D" uid="uid://cuocfbbqw3bfi" path="res://hrt_race/sprites/levels/map004a.png" id="3_oxioo"]
 [ext_resource type="Texture2D" uid="uid://xqg8yx4vkf03" path="res://hrt_race/sprites/ui/screen_transition_mask_02.png" id="4_edtli"]
@@ -36,7 +36,7 @@ shader = ExtResource("2_xfm38")
 shader_parameter/alpha_test_cutoff = 0.5
 shader_parameter/mask = SubResource("GradientTexture2D_6xh4u")
 
-[node name="Level4" unique_id=564525370 instance=ExtResource("1_oxioo")]
+[node name="RaceTrack04" unique_id=564525370 instance=ExtResource("1_oxioo")]
 
 [node name="Background" parent="." index="1" unique_id=1994129123]
 material = SubResource("ShaderMaterial_48wbe")

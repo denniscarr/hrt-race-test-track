@@ -1,11 +1,11 @@
 [gd_scene format=3 uid="uid://bna5ntie8vds7"]
 
-[ext_resource type="PackedScene" uid="uid://dpk7vdlwd671d" path="res://hrt_race/scenes/levels/lvl_base.tscn" id="1_3uivm"]
+[ext_resource type="PackedScene" uid="uid://dpk7vdlwd671d" path="res://hrt_race/scenes/race_tracks/race_track_base.tscn" id="1_3uivm"]
 [ext_resource type="Shader" uid="uid://661o74uwcvb4" path="res://hrt_race/shaders/mask.gdshader" id="2_6e8au"]
 [ext_resource type="Texture2D" uid="uid://xqg8yx4vkf03" path="res://hrt_race/sprites/ui/screen_transition_mask_02.png" id="3_1tqun"]
 [ext_resource type="AudioStream" uid="uid://bndtyp6dr8ot5" path="res://hrt_race/audio/music/anibal/horse_epic.wav" id="4_jyfc1"]
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_2jrgi"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_iwda6"]
 resource_local_to_scene = true
 shader = ExtResource("2_6e8au")
 shader_parameter/alpha_test_cutoff = 1.0
@@ -28,10 +28,10 @@ shader = ExtResource("2_6e8au")
 shader_parameter/alpha_test_cutoff = 0.5
 shader_parameter/mask = SubResource("GradientTexture2D_6xh4u")
 
-[node name="Level" unique_id=1327660305 instance=ExtResource("1_3uivm")]
+[node name="RaceTrack01" unique_id=1327660305 instance=ExtResource("1_3uivm")]
 
 [node name="Background" parent="." index="1" unique_id=1994129123]
-material = SubResource("ShaderMaterial_2jrgi")
+material = SubResource("ShaderMaterial_iwda6")
 texture = SubResource("GradientTexture2D_48ne7")
 
 [node name="WallSprite" parent="." index="2" unique_id=1549821729]
