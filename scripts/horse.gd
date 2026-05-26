@@ -41,6 +41,8 @@ var _fixed_fx_speed_multiplier: int = SGFixed.ONE
 ## race.
 var _speed_increases: int = 0
 
+var _horses_bounced_off_this_tick: Array[Horse]
+
 @onready var _sfx_bump = $AudioStreamPlayer2DPitchRand
 
 
@@ -49,6 +51,8 @@ func _ready():
 
 
 func _physics_process(delta: float):
+	_horses_bounced_off_this_tick.clear()
+
 	if not _is_moving:
 		return
 
@@ -166,6 +170,19 @@ func get_current_speed_lossy() -> float:
 	return SGFixed.to_float(velocity.length())
 
 
+func hit_by_other_horse(other_horse: Horse, collision_normal: SGFixedVector2):
+	if _horses_bounced_off_this_tick.has(other_horse):
+		return
+
+	_horses_bounced_off_this_tick.push_back(other_horse)
+
+	var opposite_normal := collision_normal.mul(-1)
+	var to_other := fixed_position.sub(other_horse.fixed_position)
+	to_other = to_other.normalized()
+	velocity = to_other
+	_bounce(opposite_normal)
+
+
 ## Called when the horse collides with something to make it bounce in another direction
 ## Returns true in the rare scenario where the horse gets stuck in place due to not finding
 ## an open direction to move to.
@@ -210,7 +227,10 @@ func _get_start_dir() -> SGFixedVector2:
 func _check_horse_collision(p_collision: SGKinematicCollision2D):
 	var collider = p_collision.get_collider()
 	if collider is Horse:
-		var horse = collider as Horse
+		var horse := collider as Horse
+		if not _horses_bounced_off_this_tick.has(horse):
+			_horses_bounced_off_this_tick.push_back(horse)
+			horse.hit_by_other_horse(self, p_collision.normal)
 		hit_horse.emit(self, horse)
 
 
