@@ -1,0 +1,4 @@
+# Make sure imports and uids aren't accidentally committed to main.
+# Leave these lines commented out on all game-specific branches.
+*.import
+*.uid
