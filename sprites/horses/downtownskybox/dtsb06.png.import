@@ -2,21 +2,20 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://b8a7numo7fo1m"
-path.s3tc="res://.godot/imported/screen_transition_mask_02.png-89bf879324a5d1f2c0183180abc13385.s3tc.ctex"
+uid="uid://cg7bxlyit4w73"
+path="res://.godot/imported/dtsb06.png-d9586a1f23c489b053950243a698b88f.ctex"
 metadata={
-"imported_formats": ["s3tc_bptc"],
-"vram_texture": true
+"vram_texture": false
 }
 
 [deps]
 
-source_file="res://hrt_race/sprites/ui/screen_transition_mask_02.png"
-dest_files=["res://.godot/imported/screen_transition_mask_02.png-89bf879324a5d1f2c0183180abc13385.s3tc.ctex"]
+source_file="res://hrt_race/sprites/horses/downtownskybox/dtsb06.png"
+dest_files=["res://.godot/imported/dtsb06.png-d9586a1f23c489b053950243a698b88f.ctex"]
 
 [params]
 
-compress/mode=2
+compress/mode=0
 compress/high_quality=false
 compress/lossy_quality=0.7
 compress/uastc_level=0
@@ -24,7 +23,7 @@ compress/rdo_quality_loss=0.0
 compress/hdr_compression=1
 compress/normal_map=0
 compress/channel_pack=0
-mipmaps/generate=true
+mipmaps/generate=false
 mipmaps/limit=-1
 roughness/mode=0
 roughness/src_normal=""
@@ -38,4 +37,4 @@ process/normal_map_invert_y=false
 process/hdr_as_srgb=false
 process/hdr_clamp_exposure=false
 process/size_limit=0
-detect_3d/compress_to=0
+detect_3d/compress_to=1
