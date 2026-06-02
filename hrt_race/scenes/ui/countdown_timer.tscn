@@ -1,0 +1,81 @@
+[gd_scene format=3 uid="uid://bk4hf6765sgm4"]
+
+[ext_resource type="Script" uid="uid://c2dcff13w8wkq" path="res://hrt_race/scripts/countdown_timer.gd" id="1_1wten"]
+[ext_resource type="Texture2D" uid="uid://bsa83mtqr5vjq" path="res://hrt_race/sprites/general/countdown_13.png" id="2_6eewt"]
+[ext_resource type="Texture2D" uid="uid://chb1l1b4i5crk" path="res://hrt_race/sprites/general/countdown_01.png" id="3_68gl1"]
+[ext_resource type="Texture2D" uid="uid://sfhsnvsqmrmr" path="res://hrt_race/sprites/general/countdown_02.png" id="4_nthgs"]
+[ext_resource type="Texture2D" uid="uid://b6wuwomv6llvt" path="res://hrt_race/sprites/general/countdown_03.png" id="5_vikcb"]
+[ext_resource type="Texture2D" uid="uid://bx0y3b7o2fnkx" path="res://hrt_race/sprites/general/countdown_04.png" id="6_53vbh"]
+[ext_resource type="Texture2D" uid="uid://cvrls6qq7hio4" path="res://hrt_race/sprites/general/countdown_05.png" id="7_ngcdf"]
+[ext_resource type="Texture2D" uid="uid://b44msbjynctxt" path="res://hrt_race/sprites/general/countdown_06.png" id="8_mgonc"]
+[ext_resource type="Texture2D" uid="uid://cshu2eo4mgk5s" path="res://hrt_race/sprites/general/countdown_07.png" id="9_cnh0u"]
+[ext_resource type="Texture2D" uid="uid://bfmotd7obs0gc" path="res://hrt_race/sprites/general/countdown_08.png" id="10_lb5rq"]
+[ext_resource type="Texture2D" uid="uid://degvyk363gk1v" path="res://hrt_race/sprites/general/countdown_09.png" id="11_re2p7"]
+[ext_resource type="Texture2D" uid="uid://cmejxbbvkuabd" path="res://hrt_race/sprites/general/countdown_10.png" id="12_dai8k"]
+[ext_resource type="Texture2D" uid="uid://2t636oduggiy" path="res://hrt_race/sprites/general/countdown_11.png" id="13_liwxi"]
+[ext_resource type="AudioStream" uid="uid://b04xpxykpofov" path="res://hrt_race/audio/sfx/countdown_00_placebets.wav" id="14_ymgmq"]
+[ext_resource type="AudioStream" uid="uid://burhx8ts8kgsg" path="res://hrt_race/audio/sfx/countdown_10.mp3" id="15_w4yre"]
+[ext_resource type="AudioStream" uid="uid://b8140girt0b21" path="res://hrt_race/audio/sfx/countdown_09.mp3" id="16_wdutg"]
+[ext_resource type="AudioStream" uid="uid://dr1ntxepuuu41" path="res://hrt_race/audio/sfx/countdown_08.mp3" id="17_saa2r"]
+[ext_resource type="AudioStream" uid="uid://cima1kl5ki842" path="res://hrt_race/audio/sfx/countdown_07.mp3" id="18_j4s2u"]
+[ext_resource type="AudioStream" uid="uid://dbr7rbwqc0fa6" path="res://hrt_race/audio/sfx/countdown_06.mp3" id="19_1mxrc"]
+[ext_resource type="AudioStream" uid="uid://3efhpbe0n6bt" path="res://hrt_race/audio/sfx/countdown_05.mp3" id="20_umwcr"]
+[ext_resource type="AudioStream" uid="uid://dty4qy8njbhtj" path="res://hrt_race/audio/sfx/countdown_04.mp3" id="21_eukxi"]
+[ext_resource type="AudioStream" uid="uid://bttly7esnw30j" path="res://hrt_race/audio/sfx/countdown_03.mp3" id="22_537om"]
+[ext_resource type="AudioStream" uid="uid://uaonkeb82alp" path="res://hrt_race/audio/sfx/countdown_02.mp3" id="23_0pt7v"]
+[ext_resource type="AudioStream" uid="uid://cacyfkr5p143l" path="res://hrt_race/audio/sfx/countdown_01.mp3" id="24_145tq"]
+[ext_resource type="AudioStream" uid="uid://d0o873vr88cmc" path="res://hrt_race/audio/sfx/countdown_go.mp3" id="25_pk10f"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_uk53i"]
+size = Vector2(248, 64)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_43bxi"]
+size = Vector2(24, 522)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_j7gcg"]
+size = Vector2(650, 24)
+
+[node name="CountdownTimer" type="Node2D" node_paths=PackedStringArray("_sprite", "_audio_player", "_bouncing_body")]
+script = ExtResource("1_1wten")
+_speed = 2.0
+_countdown_textures = Array[Texture2D]([ExtResource("2_6eewt"), ExtResource("3_68gl1"), ExtResource("4_nthgs"), ExtResource("5_vikcb"), ExtResource("6_53vbh"), ExtResource("7_ngcdf"), ExtResource("8_mgonc"), ExtResource("9_cnh0u"), ExtResource("10_lb5rq"), ExtResource("11_re2p7"), ExtResource("12_dai8k"), ExtResource("13_liwxi")])
+_countdown_sounds = Array[AudioStream]([ExtResource("14_ymgmq"), ExtResource("15_w4yre"), ExtResource("16_wdutg"), ExtResource("17_saa2r"), ExtResource("18_j4s2u"), ExtResource("19_1mxrc"), ExtResource("20_umwcr"), ExtResource("21_eukxi"), ExtResource("22_537om"), ExtResource("23_0pt7v"), ExtResource("24_145tq"), ExtResource("25_pk10f")])
+_sprite = NodePath("BouncingBody/Sprite2D")
+_audio_player = NodePath("AudioStreamPlayer2D")
+_bouncing_body = NodePath("BouncingBody")
+
+[node name="BouncingBody" type="CharacterBody2D" parent="."]
+z_index = 10
+position = Vector2(80, 116)
+collision_layer = 256
+collision_mask = 256
+motion_mode = 1
+
+[node name="Sprite2D" type="Sprite2D" parent="BouncingBody"]
+texture = ExtResource("3_68gl1")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="BouncingBody"]
+shape = SubResource("RectangleShape2D_uk53i")
+
+[node name="StaticBody2D" type="StaticBody2D" parent="."]
+collision_layer = 256
+collision_mask = 256
+
+[node name="LeftCountdownBlocker" type="CollisionShape2D" parent="StaticBody2D"]
+position = Vector2(-332, 0)
+shape = SubResource("RectangleShape2D_43bxi")
+
+[node name="RightCountdownBlocker" type="CollisionShape2D" parent="StaticBody2D"]
+position = Vector2(332, 0)
+shape = SubResource("RectangleShape2D_43bxi")
+
+[node name="TopCountdownBlocker" type="CollisionShape2D" parent="StaticBody2D"]
+position = Vector2(0, -252)
+shape = SubResource("RectangleShape2D_j7gcg")
+
+[node name="BottomCountdownBlocker" type="CollisionShape2D" parent="StaticBody2D"]
+position = Vector2(0, 252)
+shape = SubResource("RectangleShape2D_j7gcg")
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
+position = Vector2(80, 116)
