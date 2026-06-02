@@ -21,7 +21,7 @@ func _notification(what: int) -> void:
 
 func generate_collision(wall_tex: Texture2D):
 	# Generate SGCollisionPolygons and then convert them to physics server objects.
-	var collision_polys := Util.create_sgpolygons_from_texture_hollow(
+	var collision_polys := GeomUtil.create_sgpolygons_from_texture_hollow(
 		wall_tex, _precision, _segments
 	)
 	for collision_poly: SGCollisionPolygon2D in collision_polys:

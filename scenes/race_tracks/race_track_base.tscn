@@ -3,24 +3,22 @@
 [ext_resource type="Script" uid="uid://ucva7hqyi28l" path="res://hrt_race/scripts/race_track.gd" id="1_2q6dc"]
 [ext_resource type="PackedScene" uid="uid://cicnqui6nlmmy" path="res://hrt_race/scenes/race_objects/horse.tscn" id="2_3rriw"]
 [ext_resource type="Texture2D" uid="uid://jkiy1lolpam8" path="res://hrt_race/sprites/general/gate.png" id="2_ukglk"]
-[ext_resource type="Script" uid="uid://c6tl6ygdgxpu2" path="res://hrt_race/scripts/clash_manager.gd" id="3_575cj"]
 [ext_resource type="PackedScene" uid="uid://bbpkyemxfsapi" path="res://hrt_race/scenes/race_objects/goal.tscn" id="4_o1chu"]
-[ext_resource type="Texture2D" uid="uid://c7jmtkabnpow3" path="res://hrt_race/sprites/levels/map001a.png" id="5_43bxi"]
+[ext_resource type="Texture2D" uid="uid://dnd20o323iprq" path="res://hrt_race/sprites/levels/map001a.png" id="5_43bxi"]
 [ext_resource type="Script" uid="uid://b6un5bcvaoyv6" path="res://hrt_race/scripts/level_collision.gd" id="5_bd4s6"]
 [ext_resource type="Shader" uid="uid://cxfhsmy0e31fv" path="res://hrt_race/shaders/mask.gdshader" id="6_h4ce7"]
-[ext_resource type="Texture2D" uid="uid://b8a7numo7fo1m" path="res://hrt_race/sprites/ui/screen_transition_mask_02.png" id="7_53c65"]
+[ext_resource type="Texture2D" uid="uid://dbj4njsy1dxgd" path="res://hrt_race/sprites/ui/screen_transition_mask_02.png" id="7_53c65"]
 [ext_resource type="PackedScene" uid="uid://bk4hf6765sgm4" path="res://hrt_race/scenes/ui/countdown_timer.tscn" id="9_43bxi"]
 [ext_resource type="PackedScene" uid="uid://wtxuiarjiv0p" path="res://hrt_race/scenes/ui/victory_image.tscn" id="10_j7gcg"]
 [ext_resource type="FontFile" uid="uid://bdxe28icq631d" path="res://hrt_race/fonts/terminal_vector.ttf" id="11_qhwlw"]
 [ext_resource type="PackedScene" uid="uid://8y4f7jhupdsf" path="res://hrt_race/scenes/ui/race_clock.tscn" id="12_0caop"]
-[ext_resource type="Script" uid="uid://d25vbxb2q6pmq" path="res://hrt_race/scripts/fixed_tweener.gd" id="12_bd4s6"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_53c65"]
 shader = ExtResource("6_h4ce7")
 shader_parameter/alpha_test_cutoff = 1.0
 shader_parameter/alpha_test = ExtResource("7_53c65")
 
-[node name="RaceTrack" type="SGFixedNode2D" unique_id=476603249 node_paths=PackedStringArray("_spawn_point_holder", "_gate_holder", "_goal_holder", "_wall_sprite", "_countdown_timer", "_victory_image", "_fixed_tweener", "_collision_manager")]
+[node name="RaceTrack" type="SGFixedNode2D" unique_id=476603249 node_paths=PackedStringArray("_spawn_point_holder", "_gate_holder", "_goal_holder", "_wall_sprite", "_countdown_timer", "_victory_image", "_collision_manager")]
 editor_description = "Base scene for all levels"
 script = ExtResource("1_2q6dc")
 _horse_packed_scene = ExtResource("2_3rriw")
@@ -30,11 +28,7 @@ _goal_holder = NodePath("GoalHolder")
 _wall_sprite = NodePath("WallSprite")
 _countdown_timer = NodePath("CountdownTimer")
 _victory_image = NodePath("VictoryImage")
-_fixed_tweener = NodePath("FixedTweener")
 _collision_manager = NodePath("LevelCollision")
-
-[node name="ClashManager" type="Node" parent="." unique_id=1825178907]
-script = ExtResource("3_575cj")
 
 [node name="Background" type="Sprite2D" parent="." unique_id=1994129123]
 visibility_layer = 2
@@ -87,6 +81,3 @@ theme_override_fonts/font = ExtResource("11_qhwlw")
 [node name="RaceClock" parent="." unique_id=972776598 instance=ExtResource("12_0caop")]
 visible = true
 position = Vector2(-177, -46)
-
-[node name="FixedTweener" type="Node" parent="." unique_id=778255434]
-script = ExtResource("12_bd4s6")

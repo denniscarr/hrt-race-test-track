@@ -9,13 +9,12 @@ signal grabbed_by_horse(horse_who_grabbed_me: Horse)
 
 @export var _sprite: Sprite2D
 
-
 var _eaten: bool = false
 
 
 func _ready() -> void:
 	# Create collision
-	var colliders := Util.create_sgpolygons_from_texture(_sprite.texture, 2.0)
+	var colliders := GeomUtil.create_sgpolygons_from_texture(_sprite.texture, 2.0)
 	for collider: SGCollisionPolygon2D in colliders:
 		add_child(collider)
 

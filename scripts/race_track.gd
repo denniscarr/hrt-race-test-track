@@ -47,9 +47,10 @@ enum State { IDLE, COUNTDOWN, RACE, VICTORY }
 ## The thing that shows the winning horse when the race ends
 @export var _victory_image: VictoryImage
 
-@export var _fixed_tweener: FixedTweener
-
 @export var _collision_manager: LevelCollision
+
+## Time scale to be applied to all gameplay stuff. Meant to be used during QTEs or hitpause.
+var time_scale: int = SGFixed.ONE
 
 var current_state: State:
 	get:
@@ -72,12 +73,6 @@ var paused: bool:
 	get:
 		return _paused
 
-## The overall timescale that should be used by all gameplay objects
-var time_scale: int:
-	get:
-		# If there are ever other things that affect time scale, we can factor them in here
-		return _fixed_qte_time_scale
-
 var goals: Array[Goal]:
 	get:
 		return _goals
@@ -93,10 +88,12 @@ var _horse_by_name: Dictionary[String, Horse]
 
 var _goals: Array[Goal]
 
-## Time scale to be applied to all gameplay stuff. Meant to be used during QTEs or hitpause.
-var _fixed_qte_time_scale: int = SGFixed.ONE
-
 var _current_state: State = State.IDLE
+
+## The camera used during victory animations
+var _race_cam: Camera2D
+
+var _race_cam_tween: Tween
 
 
 func _ready():
@@ -137,7 +134,9 @@ func apply_goal_override(override_scene: PackedScene):
 func apply_countdown_timer_override(override_scene: PackedScene):
 	var override := override_scene.instantiate()
 	if not (override is CountdownTimer):
-		push_error("apply_countdown_timer_override only works with scenes that extend CountdownTimer")
+		push_error(
+			"apply_countdown_timer_override only works with scenes that extend CountdownTimer",
+		)
 		return
 
 	var new_timer := override as CountdownTimer
@@ -150,8 +149,20 @@ func apply_countdown_timer_override(override_scene: PackedScene):
 	_countdown_timer = new_timer
 
 
+## Sets a camera to be used during animations, like the victory animation.[br]
+## This camera will become managed and have tweens attached to it, so be careful if you're applying
+## your own tweens/movement logic to it.[br]
+## Ideally, call this before initialize. If there is no camera assigned, certain animations won't
+## play.
+func set_race_cam(cam: Camera2D):
+	_race_cam = cam
+
+
 ## Initializes level. Call this after any override functions.
 func initialize(horse_datas: Array[HorseData]):
+	if _race_cam:
+		_race_cam.zoom = Vector2.ONE
+
 	_spawn_horses(horse_datas)
 	_collision_manager.generate_collision(_wall_sprite.texture)
 
@@ -167,15 +178,22 @@ func initialize(horse_datas: Array[HorseData]):
 	_victory_image.image_shown.connect(_on_victory_image_image_shown)
 
 
-## Starts the pre-race countdown
+## Starts the pre-race countdown. The race will automatically start at the end of the countdown.
 func start_countdown():
+	if _current_state == State.COUNTDOWN:
+		return
+
 	_current_state = State.COUNTDOWN
 	_countdown_timer.start_countdown(_countdown_duration)
 
 
 func start_race():
+	if _current_state == State.RACE:
+		return
+
 	_current_state = State.RACE
 
+	_countdown_timer.finish_countdown()
 	$AudioStreamPlayer2D.play()
 	$RaceClock.show()
 	$RaceClock.start_counting = true
@@ -199,16 +217,6 @@ func get_horse_by_name(horse_name: String) -> Horse:
 	if _horse_by_name.has(horse_name):
 		return _horse_by_name[horse_name]
 	return null
-
-
-func tween_qte_time_scale(fixed_from: int, fixed_to: int, fixed_duration: int):
-	_fixed_qte_time_scale = fixed_from
-	_fixed_tweener.kill()
-	_fixed_tweener.tween_property(self, "_fixed_qte_time_scale", fixed_to, fixed_duration)
-
-
-func reset_qte_time_scale():
-	_fixed_qte_time_scale = SGFixed.ONE
 
 
 ## Creates all horses in a random order at random spawn points
@@ -254,21 +262,25 @@ func _start_victory():
 
 ## Does the animation for when a horse has won the race
 func _do_win_animation():
-	await get_tree().create_timer(1.5).timeout
+	# If the race cam was not set, skip the zoom animation
+	if _race_cam == null:
+		_victory_image.do_show_animation(_winning_horse.horse_data)
+		return
 
-	await (
-		RaceCamera
-		. instance
-		. zoom_tween(
-			15,
-			2.0,
-			Tween.EaseType.EASE_IN,
-			Tween.TransitionType.TRANS_SINE,
+	if _race_cam_tween:
+		_race_cam_tween.kill()
+
+	_race_cam_tween = create_tween()
+	_race_cam_tween.tween_interval(1.5)
+	_race_cam_tween.set_trans(Tween.TransitionType.TRANS_SINE)
+	_race_cam_tween.set_ease(Tween.EaseType.EASE_IN)
+	_race_cam_tween.tween_property(_race_cam, "zoom", Vector2.ONE * 15, 2.0)
+	(
+		_race_cam_tween
+		. tween_callback(
+			_victory_image.do_show_animation.bind(_winning_horse.horse_data, _race_cam.zoom.x),
 		)
-		. finished
 	)
-
-	_victory_image.do_show_animation(_winning_horse.horse_data)
 
 
 func _on_goal_grabbed_by_horse(horse: Horse):

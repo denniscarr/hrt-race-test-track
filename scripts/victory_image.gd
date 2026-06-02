@@ -42,9 +42,9 @@ func _ready() -> void:
 
 
 ## Does the animation where the image is shown and the winning horse gets slapped on it
-func do_show_animation(horse_data: HorseData):
+func do_show_animation(horse_data: HorseData, cam_zoom: float = 1.0):
 	# Fit in front of camera regardless of its position or zoom
-	scale = Vector2.ONE * (1.0 / RaceCamera.instance.zoom.x)
+	scale = Vector2.ONE * (1.0 / cam_zoom)
 
 	_horse_image.visible = true
 	_background_image.visible = true
