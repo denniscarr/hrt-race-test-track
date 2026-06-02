@@ -12,3 +12,4 @@
 - geom_util.gd
 - fsm_controller.gd
 - fsm_state.gd
+- audio_pitch_rand.gd
