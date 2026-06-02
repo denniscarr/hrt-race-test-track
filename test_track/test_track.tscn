@@ -1,0 +1,8 @@
+[gd_scene format=3 uid="uid://c4t23m73gx6gw"]
+
+[ext_resource type="Script" uid="uid://dhrs6utafayew" path="res://test_track/test_track.gd" id="1_531do"]
+
+[node name="TestTrack" type="Node2D" unique_id=716133876]
+script = ExtResource("1_531do")
+_horses = null
+_race_scenes = null

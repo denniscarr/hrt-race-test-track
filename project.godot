@@ -14,6 +14,10 @@ config/name="Hrt Race Test Track"
 config/features=PackedStringArray("4.6", "GL Compatibility")
 config/icon="res://icon.svg"
 
+[editor_plugins]
+
+enabled=PackedStringArray("res://addons/gdscript_formatter/plugin.cfg", "res://addons/sg-physics-inspector/plugin.cfg")
+
 [physics]
 
 3d/physics_engine="Jolt Physics"
