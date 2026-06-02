@@ -88,7 +88,7 @@ func initialize(data: HorseData):
 	_view.initialize(data)
 	_view.set_look_direction(_get_start_dir())
 
-	var collision_polys := Util.create_sgpolygons_from_texture(_horse_data.textures[0], 4.0)
+	var collision_polys := GeomUtil.create_sgpolygons_from_texture(_horse_data.textures[0], 4.0)
 	for poly: SGCollisionPolygon2D in collision_polys:
 		add_child(poly)
 
@@ -99,6 +99,7 @@ func start_moving():
 	_fixed_move_speed = _horse_data.base_speed
 	velocity = _get_start_dir().mul(_fixed_move_speed)
 	_fixed_speed_increase_timer = _horse_data.speed_increase_ticks
+	view.set_name_label_visible(false)
 
 
 ## Call when the race ends to make the horse stop moving.
