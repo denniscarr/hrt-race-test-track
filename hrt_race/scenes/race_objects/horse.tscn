@@ -1,8 +1,8 @@
 [gd_scene format=3 uid="uid://cicnqui6nlmmy"]
 
-[ext_resource type="Script" uid="uid://dfflx4fjonlp2" path="res://hrt_race/scripts/horse.gd" id="1_4to3w"]
-[ext_resource type="AudioStream" uid="uid://6b1buytysq66" path="res://hrt_race/audio/sfx/chop3.wav" id="2_ikl1e"]
-[ext_resource type="Script" uid="uid://rt65lap1wrbt" path="res://scripts/gameplay/audio_pitch_rand.gd" id="3_3ggyy"]
+[ext_resource type="Script" uid="uid://cg87adm6aa7vs" path="res://hrt_race/scripts/horse.gd" id="1_4to3w"]
+[ext_resource type="AudioStream" uid="uid://8wp2tu3t1oc2" path="res://hrt_race/audio/sfx/chop3.wav" id="2_ikl1e"]
+[ext_resource type="Script" uid="uid://crtieqftcjs2r" path="res://hrt_race/scripts/audio_pitch_rand.gd" id="3_3ggyy"]
 [ext_resource type="PackedScene" uid="uid://dckwsa5s6a1ur" path="res://hrt_race/scenes/race_objects/horse_view.tscn" id="4_eci21"]
 
 [node name="Horse" type="SGCharacterBody2D" unique_id=679903820 node_paths=PackedStringArray("_view")]
