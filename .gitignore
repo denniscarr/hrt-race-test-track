@@ -4,5 +4,5 @@
 
 *.tmp
 
-/hrt_race/**/*.import
-/hrt_race/**/*.uid
+hrt_race/**/*.import
+hrt_race/**/*.uid
