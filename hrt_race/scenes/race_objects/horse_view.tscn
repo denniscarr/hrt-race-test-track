@@ -1,0 +1,33 @@
+[gd_scene format=3 uid="uid://dckwsa5s6a1ur"]
+
+[ext_resource type="Script" uid="uid://buq1svkachyih" path="res://hrt_race/scripts/horse_view.gd" id="1_bcl8i"]
+[ext_resource type="Shader" uid="uid://k23jtrq3bunk" path="res://hrt_race/shaders/horse.gdshader" id="2_1p8cr"]
+[ext_resource type="Texture2D" uid="uid://0873wirhocl7" path="res://hrt_race/sprites/horses/cyan/oob02.png" id="2_rthw0"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_rthw0"]
+resource_local_to_scene = true
+shader = ExtResource("2_1p8cr")
+shader_parameter/tint_color = Color(1, 1, 1, 1)
+shader_parameter/tint_strength = 0.0
+shader_parameter/black_replacement = Color(0, 0, 0, 1)
+
+[node name="HorseView" type="Node2D" unique_id=1624413055 node_paths=PackedStringArray("_main_sprite", "_name_label")]
+texture_filter = 1
+script = ExtResource("1_bcl8i")
+_main_sprite = NodePath("HorseSprite")
+_name_label = NodePath("HorseLabel")
+
+[node name="HorseSprite" type="Sprite2D" parent="." unique_id=1062111410]
+material = SubResource("ShaderMaterial_rthw0")
+texture = ExtResource("2_rthw0")
+
+[node name="HorseLabel" type="Label" parent="." unique_id=1991286127]
+visibility_layer = 2
+offset_left = -18.0
+offset_top = 13.0
+offset_right = 22.0
+offset_bottom = 36.0
+theme_override_colors/font_color = Color(0.17243147, 0.88244885, 0, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 3
+text = "HRS"
