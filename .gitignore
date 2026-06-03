@@ -1,8 +1,2 @@
-# Godot 4+ specific ignores
-.godot/
-/android/
-
-*.tmp
-
-hrt_race/**/*.import
-hrt_race/**/*.uid
+**/*.import
+**/*.uid
