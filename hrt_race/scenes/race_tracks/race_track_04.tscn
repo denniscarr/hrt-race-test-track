@@ -1,0 +1,106 @@
+[gd_scene format=3 uid="uid://cn3ix5dyuhbn3"]
+
+[ext_resource type="PackedScene" uid="uid://dpk7vdlwd671d" path="res://hrt_race/scenes/race_tracks/race_track_base.tscn" id="1_oxioo"]
+[ext_resource type="Shader" uid="uid://661o74uwcvb4" path="res://hrt_race/shaders/mask.gdshader" id="2_xfm38"]
+[ext_resource type="Texture2D" uid="uid://cuocfbbqw3bfi" path="res://hrt_race/sprites/levels/map004a.png" id="3_oxioo"]
+[ext_resource type="Texture2D" uid="uid://xqg8yx4vkf03" path="res://hrt_race/sprites/ui/screen_transition_mask_02.png" id="4_edtli"]
+[ext_resource type="AudioStream" uid="uid://bndtyp6dr8ot5" path="res://hrt_race/audio/music/anibal/horse_epic.wav" id="5_c23ct"]
+
+[sub_resource type="Gradient" id="Gradient_sfmk3"]
+colors = PackedColorArray(0.43529412, 0, 0, 1, 1, 1, 0.77254903, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_654ak"]
+gradient = SubResource("Gradient_sfmk3")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_48wbe"]
+resource_local_to_scene = true
+shader = ExtResource("2_xfm38")
+shader_parameter/alpha_test_cutoff = 1.0
+shader_parameter/alpha_test = ExtResource("4_edtli")
+shader_parameter/mask = SubResource("GradientTexture2D_654ak")
+
+[sub_resource type="Gradient" id="Gradient_v45ci"]
+colors = PackedColorArray(0.5921569, 0.53333336, 0.039215688, 1, 0.84705883, 0.7019608, 0.5372549, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_48ne7"]
+gradient = SubResource("Gradient_v45ci")
+
+[sub_resource type="Gradient" id="Gradient_48ne7"]
+colors = PackedColorArray(0, 0, 0.47058824, 1, 0, 0, 1, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_6xh4u"]
+gradient = SubResource("Gradient_48ne7")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_xfm38"]
+shader = ExtResource("2_xfm38")
+shader_parameter/alpha_test_cutoff = 0.5
+shader_parameter/mask = SubResource("GradientTexture2D_6xh4u")
+
+[node name="RaceTrack04" unique_id=564525370 instance=ExtResource("1_oxioo")]
+
+[node name="Background" parent="." index="1" unique_id=1994129123]
+material = SubResource("ShaderMaterial_48wbe")
+texture = SubResource("GradientTexture2D_48ne7")
+
+[node name="WallSprite" parent="." index="2" unique_id=1549821729]
+material = SubResource("ShaderMaterial_xfm38")
+texture = ExtResource("3_oxioo")
+
+[node name="Node2D" type="SGFixedNode2D" parent="SpawnPoints" parent_id_path=PackedInt32Array(1788382203) index="0" unique_id=1631237118]
+fixed_position_x = -12058624
+fixed_position_y = -4521984
+position = Vector2(-184, -69)
+
+[node name="Node2D3" type="SGFixedNode2D" parent="SpawnPoints" parent_id_path=PackedInt32Array(1788382203) index="1" unique_id=849062188]
+fixed_position_x = -17694720
+fixed_position_y = -10092544
+position = Vector2(-270, -154)
+
+[node name="Node2D4" type="SGFixedNode2D" parent="SpawnPoints" parent_id_path=PackedInt32Array(1788382203) index="2" unique_id=126181118]
+fixed_position_x = -14614528
+fixed_position_y = -12320768
+position = Vector2(-223, -188)
+
+[node name="Node2D5" type="SGFixedNode2D" parent="SpawnPoints" parent_id_path=PackedInt32Array(1788382203) index="3" unique_id=1286981821]
+fixed_position_x = -11403264
+fixed_position_y = -10944512
+position = Vector2(-174, -167)
+
+[node name="Node2D7" type="SGFixedNode2D" parent="SpawnPoints" parent_id_path=PackedInt32Array(1788382203) index="4" unique_id=329103694]
+fixed_position_x = -14680064
+fixed_position_y = -7995392
+position = Vector2(-224, -122)
+
+[node name="Node2D9" type="SGFixedNode2D" parent="SpawnPoints" parent_id_path=PackedInt32Array(1788382203) index="5" unique_id=1810420531]
+fixed_position_x = -9502720
+fixed_position_y = -7405568
+position = Vector2(-145, -113)
+
+[node name="Node2D6" type="SGFixedNode2D" parent="SpawnPoints" parent_id_path=PackedInt32Array(1788382203) index="6" unique_id=830744307]
+fixed_position_x = -15597568
+fixed_position_y = -3080192
+position = Vector2(-238, -47)
+
+[node name="Gate" parent="GateHolder" parent_id_path=PackedInt32Array(653756875) index="0" unique_id=310014164]
+position = Vector2(-98.00001, -109.9178)
+scale = Vector2(1.16263, 0.8356164)
+
+[node name="Goal" parent="GoalHolder" parent_id_path=PackedInt32Array(1830968679) index="0" unique_id=1045274017]
+fixed_position_x = -9764864
+fixed_position_y = 8323072
+position = Vector2(-149, 127)
+
+[node name="AudioStreamPlayer2D" parent="." index="8" unique_id=1623793595]
+stream = ExtResource("5_c23ct")
+
+[node name="CountdownTimer" parent="." index="9" unique_id=25542322]
+visible = false
+
+[node name="LevelText" parent="." index="11" unique_id=2140136208]
+offset_left = 26.0
+offset_top = -58.0
+offset_right = 98.0
+offset_bottom = -35.0
+
+[node name="RaceClock" parent="." index="12" unique_id=972776598]
+position = Vector2(-207, -233)
