@@ -1,0 +1,17 @@
+[gd_scene format=3 uid="uid://8y4f7jhupdsf"]
+
+[ext_resource type="Script" uid="uid://bpdpj5e6ohepl" path="res://hrt_race/scripts/race_clock.gd" id="1_srplv"]
+[ext_resource type="FontFile" uid="uid://dg0n4w2hbq66w" path="res://hrt_race/fonts/terminal_vector.ttf" id="2_5lxq6"]
+
+[node name="RaceClock" type="Node2D" unique_id=400056445]
+visible = false
+script = ExtResource("1_srplv")
+
+[node name="Label" type="Label" parent="." unique_id=1166147451]
+offset_right = 40.0
+offset_bottom = 23.0
+theme_override_colors/font_color = Color(1, 1, 0, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 5
+theme_override_fonts/font = ExtResource("2_5lxq6")
+text = "0:00:00"

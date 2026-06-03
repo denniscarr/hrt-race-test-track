@@ -1,0 +1,33 @@
+[gd_resource type="Resource" script_class="HorseData" format=3 uid="uid://cfa874h7gjyvt"]
+
+[ext_resource type="AudioStream" uid="uid://b7qm4v28020vs" path="res://hrt_race/audio/sfx/horsenei.wav" id="1_4pope"]
+[ext_resource type="Texture2D" uid="uid://b230vpm7rlg6g" path="res://hrt_race/sprites/horses/jovial/mry00.png" id="1_q8j8p"]
+[ext_resource type="Texture2D" uid="uid://bk7m0n7mabokn" path="res://hrt_race/sprites/horses/jovial/mry02.png" id="2_4pope"]
+[ext_resource type="Texture2D" uid="uid://r3nd7rexj83n" path="res://hrt_race/sprites/horses/jovial/mry04.png" id="3_aykhe"]
+[ext_resource type="Texture2D" uid="uid://bj8y0xmgsws3w" path="res://hrt_race/sprites/horses/jovial/mry06.png" id="4_b5l13"]
+[ext_resource type="Texture2D" uid="uid://yr3be0oj7igm" path="res://hrt_race/sprites/horses/jovial/mry08.png" id="5_yg8l0"]
+[ext_resource type="Texture2D" uid="uid://djo434y64lrkk" path="res://hrt_race/sprites/horses/jovial/mry10.png" id="6_uwogh"]
+[ext_resource type="Texture2D" uid="uid://bsxohxmy87mad" path="res://hrt_race/sprites/horses/jovial/mry12.png" id="7_1ug5d"]
+[ext_resource type="Texture2D" uid="uid://rxqueq55dt06" path="res://hrt_race/sprites/horses/jovial/mry14.png" id="8_3ldvj"]
+[ext_resource type="Texture2D" uid="uid://25ti4456f5ry" path="res://hrt_race/sprites/horses/jovial/mry16.png" id="9_rm0mh"]
+[ext_resource type="Texture2D" uid="uid://b8dikvr0t0251" path="res://hrt_race/sprites/horses/jovial/mry18.png" id="10_0doec"]
+[ext_resource type="Texture2D" uid="uid://bps8epbc2hdkq" path="res://hrt_race/sprites/horses/jovial/mry20.png" id="11_ylbup"]
+[ext_resource type="Texture2D" uid="uid://di0qdjap7akov" path="res://hrt_race/sprites/horses/jovial/mry22.png" id="12_oqce3"]
+[ext_resource type="Texture2D" uid="uid://bqnob48jwbp12" path="res://hrt_race/sprites/horses/jovial/mry24.png" id="13_xg0qt"]
+[ext_resource type="Texture2D" uid="uid://clbgr4inydrrl" path="res://hrt_race/sprites/horses/jovial/mry26.png" id="14_8hqia"]
+[ext_resource type="Texture2D" uid="uid://dyvqpu52cgsto" path="res://hrt_race/sprites/horses/jovial/mry28.png" id="15_f2g26"]
+[ext_resource type="Texture2D" uid="uid://cw3iio60isu65" path="res://hrt_race/sprites/horses/jovial/mry30.png" id="16_be4pf"]
+[ext_resource type="Texture2D" uid="uid://ci405mwus748g" path="res://hrt_race/sprites/horses/jovial/big_mry2.png" id="17_16eq3"]
+[ext_resource type="AudioStream" uid="uid://cue1davm70if3" path="res://hrt_race/audio/music/lexy/jovial.wav" id="18_bnb7i"]
+[ext_resource type="Script" uid="uid://hfdiruxupk8j" path="res://hrt_race/scripts/horse_data.gd" id="19_1qlxm"]
+
+[resource]
+script = ExtResource("19_1qlxm")
+_name = "Jovial Merryment"
+_name_abv = "MRY"
+_textures = Array[Texture2D]([ExtResource("1_q8j8p"), ExtResource("2_4pope"), ExtResource("3_aykhe"), ExtResource("4_b5l13"), ExtResource("5_yg8l0"), ExtResource("6_uwogh"), ExtResource("7_1ug5d"), ExtResource("8_3ldvj"), ExtResource("9_rm0mh"), ExtResource("10_0doec"), ExtResource("11_ylbup"), ExtResource("12_oqce3"), ExtResource("13_xg0qt"), ExtResource("14_8hqia"), ExtResource("15_f2g26"), ExtResource("16_be4pf")])
+_color = Color(1, 0.5019608, 0, 1)
+_victory_texture = ExtResource("17_16eq3")
+_victory_theme = ExtResource("18_bnb7i")
+_start_dir = 1
+metadata/_custom_type_script = "uid://hfdiruxupk8j"

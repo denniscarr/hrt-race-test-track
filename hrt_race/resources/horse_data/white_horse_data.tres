@@ -1,0 +1,31 @@
+[gd_resource type="Resource" script_class="HorseData" format=3 uid="uid://d1xewcqjoo8p5"]
+
+[ext_resource type="Texture2D" uid="uid://b7ft5yxonobfy" path="res://hrt_race/sprites/horses/white/white00.png" id="1_ucms8"]
+[ext_resource type="AudioStream" uid="uid://b7qm4v28020vs" path="res://hrt_race/audio/sfx/horsenei.wav" id="1_uvmiq"]
+[ext_resource type="Texture2D" uid="uid://cgf634r37m2pu" path="res://hrt_race/sprites/horses/white/white02.png" id="2_1qcqb"]
+[ext_resource type="Texture2D" uid="uid://crx5rqew61cp0" path="res://hrt_race/sprites/horses/white/white04.png" id="3_x3kv6"]
+[ext_resource type="Texture2D" uid="uid://qed7jbm0opbf" path="res://hrt_race/sprites/horses/white/white06.png" id="4_uvmiq"]
+[ext_resource type="Texture2D" uid="uid://b5lgx5n0ki56e" path="res://hrt_race/sprites/horses/white/white08.png" id="5_dmoua"]
+[ext_resource type="Texture2D" uid="uid://dpagoye1t7u77" path="res://hrt_race/sprites/horses/white/white10.png" id="6_nvkt7"]
+[ext_resource type="Texture2D" uid="uid://dvbo2txxl8dio" path="res://hrt_race/sprites/horses/white/white12.png" id="7_n4b1m"]
+[ext_resource type="Texture2D" uid="uid://b8uif66l6ej6c" path="res://hrt_race/sprites/horses/white/white14.png" id="8_aw21j"]
+[ext_resource type="Texture2D" uid="uid://obgx37q3aufp" path="res://hrt_race/sprites/horses/white/white16.png" id="9_io82a"]
+[ext_resource type="Texture2D" uid="uid://chuepolen28a7" path="res://hrt_race/sprites/horses/white/white18.png" id="10_4ykna"]
+[ext_resource type="Texture2D" uid="uid://v027kit7a5it" path="res://hrt_race/sprites/horses/white/white20.png" id="11_3d2cv"]
+[ext_resource type="Texture2D" uid="uid://n0ckk57umf4r" path="res://hrt_race/sprites/horses/white/white22.png" id="12_5l83u"]
+[ext_resource type="Texture2D" uid="uid://1gyv1722jctn" path="res://hrt_race/sprites/horses/white/white24.png" id="13_thg1v"]
+[ext_resource type="Texture2D" uid="uid://mjksq4ai4sge" path="res://hrt_race/sprites/horses/white/white26.png" id="14_fcmp0"]
+[ext_resource type="Texture2D" uid="uid://dv4dfws7eyis" path="res://hrt_race/sprites/horses/white/white28.png" id="15_55yqc"]
+[ext_resource type="Texture2D" uid="uid://bmmuqaj6qotp0" path="res://hrt_race/sprites/horses/white/white30.png" id="16_t0t1c"]
+[ext_resource type="Script" uid="uid://hfdiruxupk8j" path="res://hrt_race/scripts/horse_data.gd" id="17_7ksxd"]
+[ext_resource type="Texture2D" uid="uid://c3lqt4vmvrq2p" path="res://hrt_race/sprites/horses/white/victory_white.png" id="17_x3kv6"]
+[ext_resource type="AudioStream" uid="uid://bkxngwrfg4fjh" path="res://hrt_race/audio/music/lexy/white_horse.wav" id="18_uvmiq"]
+
+[resource]
+script = ExtResource("17_7ksxd")
+_name = "Superstitional Realism"
+_name_abv = "SUP"
+_textures = Array[Texture2D]([ExtResource("1_ucms8"), ExtResource("2_1qcqb"), ExtResource("3_x3kv6"), ExtResource("4_uvmiq"), ExtResource("5_dmoua"), ExtResource("6_nvkt7"), ExtResource("7_n4b1m"), ExtResource("8_aw21j"), ExtResource("9_io82a"), ExtResource("10_4ykna"), ExtResource("11_3d2cv"), ExtResource("12_5l83u"), ExtResource("13_thg1v"), ExtResource("14_fcmp0"), ExtResource("15_55yqc"), ExtResource("16_t0t1c")])
+_victory_texture = ExtResource("17_x3kv6")
+_victory_theme = ExtResource("18_uvmiq")
+metadata/_custom_type_script = "uid://hfdiruxupk8j"
