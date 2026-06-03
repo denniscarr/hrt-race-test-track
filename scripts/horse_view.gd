@@ -6,7 +6,7 @@ extends Node2D
 
 @export var _main_sprite: Sprite2D
 
-## Horse name label for start of race
+## Horse name abbreviation label for start of race
 @export var _name_label: Label
 
 
