@@ -1,8 +1,7 @@
 [gd_scene format=3 uid="uid://cicnqui6nlmmy"]
 
-[ext_resource type="Script" uid="uid://cg87adm6aa7vs" path="res://hrt_race/scripts/horse.gd" id="1_4to3w"]
-[ext_resource type="AudioStream" uid="uid://8wp2tu3t1oc2" path="res://hrt_race/audio/sfx/chop3.wav" id="2_ikl1e"]
-[ext_resource type="Script" uid="uid://crtieqftcjs2r" path="res://hrt_race/scripts/audio_pitch_rand.gd" id="3_3ggyy"]
+[ext_resource type="Script" uid="uid://cofb6w8l0f4oa" path="res://hrt_race/scripts/horse.gd" id="1_4to3w"]
+[ext_resource type="AudioStream" uid="uid://chydu2ifvx88g" path="res://hrt_race/audio/sfx/chop3.wav" id="2_ikl1e"]
 [ext_resource type="PackedScene" uid="uid://dckwsa5s6a1ur" path="res://hrt_race/scenes/race_objects/horse_view.tscn" id="4_eci21"]
 
 [node name="Horse" type="SGCharacterBody2D" unique_id=679903820 node_paths=PackedStringArray("_view")]
@@ -10,11 +9,8 @@ collision_layer = 3
 script = ExtResource("1_4to3w")
 _view = NodePath("HorseView")
 
-[node name="AudioStreamPlayer2DPitchRand" type="AudioStreamPlayer2D" parent="." unique_id=1220818124]
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="." unique_id=1220818124]
 stream = ExtResource("2_ikl1e")
 volume_db = -4.078
-script = ExtResource("3_3ggyy")
-_pitch_min = 0.6
-_pitch_max = 2.0
 
 [node name="HorseView" parent="." unique_id=1624413055 instance=ExtResource("4_eci21")]

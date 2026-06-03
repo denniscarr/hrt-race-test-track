@@ -43,7 +43,7 @@ var _speed_increases: int = 0
 
 var _horses_bounced_off_this_tick: Array[Horse]
 
-@onready var _sfx_bump = $AudioStreamPlayer2DPitchRand
+@onready var _sfx_bump = $AudioStreamPlayer2D
 
 
 func _ready():
@@ -210,7 +210,7 @@ func _bounce(collision_normal: SGFixedVector2, attempts: int = 0) -> bool:
 		return _bounce(collision.get_normal(), attempts + 1)
 
 	# Success. We found an empty direction to bounce in.
-	_sfx_bump.play_random()
+	_sfx_bump.play()
 	return false
 
 
