@@ -1,0 +1,33 @@
+[gd_resource type="Resource" script_class="HorseData" format=3 uid="uid://c217cmu116xqc"]
+
+[ext_resource type="AudioStream" uid="uid://b7qm4v28020vs" path="res://hrt_race/audio/sfx/horsenei.wav" id="1_md0x5"]
+[ext_resource type="Texture2D" uid="uid://1qpnpfaghs2o" path="res://hrt_race/sprites/horses/cyan/oob00.png" id="2_md0x5"]
+[ext_resource type="Texture2D" uid="uid://pnsyu8n7ntap" path="res://hrt_race/sprites/horses/cyan/oob02.png" id="3_5p334"]
+[ext_resource type="Texture2D" uid="uid://bbcogbevigkco" path="res://hrt_race/sprites/horses/cyan/oob04.png" id="4_y2ghu"]
+[ext_resource type="Texture2D" uid="uid://ct36ju3xhnchb" path="res://hrt_race/sprites/horses/cyan/oob06.png" id="5_yjpka"]
+[ext_resource type="Texture2D" uid="uid://6qmnm84mrkuy" path="res://hrt_race/sprites/horses/cyan/oob08.png" id="6_v7682"]
+[ext_resource type="Texture2D" uid="uid://dcgxjwikn6c8i" path="res://hrt_race/sprites/horses/cyan/oob10.png" id="7_4lw3m"]
+[ext_resource type="Texture2D" uid="uid://ccdsbqhu1vlo8" path="res://hrt_race/sprites/horses/cyan/oob12.png" id="8_pdclm"]
+[ext_resource type="Texture2D" uid="uid://bntc01j7g043k" path="res://hrt_race/sprites/horses/cyan/oob14.png" id="9_sdxud"]
+[ext_resource type="Texture2D" uid="uid://d2ibr7fdt7of1" path="res://hrt_race/sprites/horses/cyan/oob16.png" id="10_mrce4"]
+[ext_resource type="Texture2D" uid="uid://bpcg2mcjg1lm0" path="res://hrt_race/sprites/horses/cyan/oob18.png" id="11_um434"]
+[ext_resource type="Texture2D" uid="uid://b3q5ix0rpi7ec" path="res://hrt_race/sprites/horses/cyan/oob20.png" id="12_5n182"]
+[ext_resource type="Texture2D" uid="uid://c8ec2pfysotlg" path="res://hrt_race/sprites/horses/cyan/oob22.png" id="13_dbi2m"]
+[ext_resource type="Texture2D" uid="uid://dh2ppvlphevf0" path="res://hrt_race/sprites/horses/cyan/oob24.png" id="14_un71n"]
+[ext_resource type="Texture2D" uid="uid://cdjhrip4yj5b0" path="res://hrt_race/sprites/horses/cyan/oob26.png" id="15_rbost"]
+[ext_resource type="Texture2D" uid="uid://cbr71gr2815q3" path="res://hrt_race/sprites/horses/cyan/oob28.png" id="16_cgalw"]
+[ext_resource type="Texture2D" uid="uid://cn6kb5xk6e43y" path="res://hrt_race/sprites/horses/cyan/oob30.png" id="17_5skbp"]
+[ext_resource type="Texture2D" uid="uid://44cyr0160xr" path="res://hrt_race/sprites/horses/cyan/big_cyn2.png" id="18_dw7eh"]
+[ext_resource type="AudioStream" uid="uid://rj74hno2nefl" path="res://hrt_race/audio/music/lexy/cyan.wav" id="19_0tdf3"]
+[ext_resource type="Script" uid="uid://hfdiruxupk8j" path="res://hrt_race/scripts/horse_data.gd" id="20_jvx0s"]
+
+[resource]
+script = ExtResource("20_jvx0s")
+_name = "Oob"
+_name_abv = "OOB"
+_textures = Array[Texture2D]([ExtResource("2_md0x5"), ExtResource("3_5p334"), ExtResource("4_y2ghu"), ExtResource("5_yjpka"), ExtResource("6_v7682"), ExtResource("7_4lw3m"), ExtResource("8_pdclm"), ExtResource("9_sdxud"), ExtResource("10_mrce4"), ExtResource("11_um434"), ExtResource("12_5n182"), ExtResource("13_dbi2m"), ExtResource("14_un71n"), ExtResource("15_rbost"), ExtResource("16_cgalw"), ExtResource("17_5skbp")])
+_color = Color(0, 1, 1, 1)
+_victory_texture = ExtResource("18_dw7eh")
+_victory_theme = ExtResource("19_0tdf3")
+_start_dir = 25
+metadata/_custom_type_script = "uid://hfdiruxupk8j"
