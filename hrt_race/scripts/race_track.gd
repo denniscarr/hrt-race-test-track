@@ -285,6 +285,7 @@ func _do_win_animation():
 
 func _on_goal_grabbed_by_horse(horse: Horse):
 	_winning_horse = horse
+	$RaceClock.start_counting = false
 	$AudioStreamPlayer2D.stream = horse.horse_data.victory_theme
 	$AudioStreamPlayer2D.play()
 	horse.win()

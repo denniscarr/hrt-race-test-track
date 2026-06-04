@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://cicnqui6nlmmy"]
 
-[ext_resource type="Script" uid="uid://cofb6w8l0f4oa" path="res://hrt_race/scripts/horse.gd" id="1_4to3w"]
-[ext_resource type="AudioStream" uid="uid://chydu2ifvx88g" path="res://hrt_race/audio/sfx/chop3.wav" id="2_ikl1e"]
+[ext_resource type="Script" uid="uid://drrs2jlynef5k" path="res://hrt_race/scripts/horse.gd" id="1_4to3w"]
+[ext_resource type="AudioStream" uid="uid://87piyw5ciu0e" path="res://hrt_race/audio/sfx/chop3.wav" id="2_ikl1e"]
 [ext_resource type="PackedScene" uid="uid://dckwsa5s6a1ur" path="res://hrt_race/scenes/race_objects/horse_view.tscn" id="4_eci21"]
 
 [sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_beeco"]

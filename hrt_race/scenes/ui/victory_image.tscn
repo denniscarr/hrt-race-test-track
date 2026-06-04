@@ -1,12 +1,12 @@
 [gd_scene format=3 uid="uid://wtxuiarjiv0p"]
 
-[ext_resource type="Script" uid="uid://op7qqym01is3" path="res://hrt_race/scripts/victory_image.gd" id="1_sayv4"]
+[ext_resource type="Script" uid="uid://ch2d4l2ogf6va" path="res://hrt_race/scripts/victory_image.gd" id="1_sayv4"]
 [ext_resource type="Material" uid="uid://y14lcrw5ohnr" path="res://hrt_race/materials/victory_image_mat.tres" id="2_se2qm"]
-[ext_resource type="Texture2D" uid="uid://b0mnw5o1may61" path="res://hrt_race/sprites/general/bg_1.png" id="3_2e27b"]
-[ext_resource type="Texture2D" uid="uid://44cyr0160xr" path="res://hrt_race/sprites/horses/cyan/big_cyn2.png" id="4_pfyf6"]
-[ext_resource type="FontFile" uid="uid://d04sxdb1k3lcg" path="res://hrt_race/fonts/tempus_sans_itc.ttf" id="5_sayv4"]
+[ext_resource type="Texture2D" uid="uid://gdn332c0cs4n" path="res://hrt_race/sprites/general/bg_1.png" id="3_2e27b"]
+[ext_resource type="Texture2D" uid="uid://2b41uu011opm" path="res://hrt_race/sprites/horses/cyan/big_cyn2.png" id="4_pfyf6"]
+[ext_resource type="FontFile" uid="uid://2s2ii7u11lxh" path="res://hrt_race/fonts/tempus_sans_itc.ttf" id="5_sayv4"]
 
-[node name="VictoryImage" type="CanvasLayer" node_paths=PackedStringArray("_background_image", "_horse_image", "_horse_name_label")]
+[node name="VictoryImage" type="CanvasLayer" unique_id=2104150295 node_paths=PackedStringArray("_background_image", "_horse_image", "_horse_name_label")]
 follow_viewport_enabled = true
 script = ExtResource("1_sayv4")
 _material = ExtResource("2_se2qm")
@@ -14,7 +14,7 @@ _background_image = NodePath("Background")
 _horse_image = NodePath("Horse")
 _horse_name_label = NodePath("HorseNameLabel")
 
-[node name="Background" type="TextureRect" parent="."]
+[node name="Background" type="TextureRect" parent="." unique_id=664578663]
 visible = false
 material = ExtResource("2_se2qm")
 anchors_preset = 15
@@ -31,7 +31,7 @@ mouse_filter = 2
 texture = ExtResource("3_2e27b")
 stretch_mode = 4
 
-[node name="Horse" type="TextureRect" parent="."]
+[node name="Horse" type="TextureRect" parent="." unique_id=2087530458]
 visible = false
 material = ExtResource("2_se2qm")
 anchors_preset = 15
@@ -48,21 +48,23 @@ mouse_filter = 2
 texture = ExtResource("4_pfyf6")
 stretch_mode = 4
 
-[node name="HorseNameLabel" type="Label" parent="."]
+[node name="HorseNameLabel" type="Label" parent="." unique_id=1252980918]
 visible = false
 texture_filter = 1
-anchors_preset = 2
+anchors_preset = -1
 anchor_top = 1.0
+anchor_right = 0.1953125
 anchor_bottom = 1.0
-offset_left = -294.0
-offset_top = -355.0
-offset_right = 172.0
-offset_bottom = -269.0
+offset_left = -304.0
+offset_top = -339.0
+offset_right = 162.0
+offset_bottom = -253.0
 grow_vertical = 0
 pivot_offset = Vector2(0, 86)
 theme_override_colors/font_color = Color(1, 1, 1, 1)
 theme_override_constants/outline_size = 6
 theme_override_fonts/font = ExtResource("5_sayv4")
-theme_override_font_sizes/font_size = 65
-text = "Jovial Merriment"
+theme_override_font_sizes/font_size = 48
+text = "Resolute Mind Afternoon"
+vertical_alignment = 2
 metadata/_edit_use_anchors_ = true
