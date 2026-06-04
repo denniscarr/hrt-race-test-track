@@ -15,6 +15,11 @@ run/main_scene="uid://c4t23m73gx6gw"
 config/features=PackedStringArray("4.6", "GL Compatibility")
 config/icon="res://icon.svg"
 
+[display]
+
+window/size/viewport_width=640
+window/size/viewport_height=480
+
 [editor_plugins]
 
 enabled=PackedStringArray("res://addons/gdscript_formatter/plugin.cfg", "res://addons/sg-physics-inspector/plugin.cfg")
