@@ -278,7 +278,7 @@ func _do_win_animation():
 	(
 		_race_cam_tween
 		. tween_callback(
-			_victory_image.do_show_animation.bind(_winning_horse.horse_data, _race_cam.zoom.x),
+			_victory_image.do_show_animation.bind(_winning_horse.horse_data, _race_cam),
 		)
 	)
 
