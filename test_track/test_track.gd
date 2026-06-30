@@ -30,9 +30,29 @@ func _ready() -> void:
 
 
 func _input(event: InputEvent) -> void:
-	# Allow skip countdown
-	if _race_track != null and _race_track.current_state == RaceTrack.State.COUNTDOWN:
-		if event is InputEventKey:
-			var e := event as InputEventKey
-			if e.keycode == KEY_SPACE:
-				_race_track.start_race()
+	if _race_track != null and event is InputEventKey:
+		if event.is_action_released("debug_skip"):
+			match _race_track.current_state:
+				# Allow skip countdown
+				RaceTrack.State.COUNTDOWN:
+					_race_track.start_race()
+				# Allow skip race
+				RaceTrack.State.RACE:
+					_debug_skip_to_victory()
+
+
+func _debug_skip_to_victory():
+	# Pick a random winning horse
+	var winner := _race_track.horses.pick_random() as Horse
+	_race_track._winning_horse = winner
+
+	# Force-set some things in the race track
+	_race_track.get_node("RaceClock").start_counting = false
+	_race_track.get_node("AudioStreamPlayer2D").stream = winner.horse_data.victory_theme
+	_race_track.get_node("AudioStreamPlayer2D").play()
+
+	winner.win()
+	_race_track.goal_grabbed.emit(winner)
+
+	# In a debug method, I hereby grant access to private members
+	_race_track._start_victory()
