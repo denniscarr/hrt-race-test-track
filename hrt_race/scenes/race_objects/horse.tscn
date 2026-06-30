@@ -1,0 +1,21 @@
+[gd_scene format=3 uid="uid://cicnqui6nlmmy"]
+
+[ext_resource type="Script" uid="uid://drrs2jlynef5k" path="res://hrt_race/scripts/horse.gd" id="1_4to3w"]
+[ext_resource type="AudioStream" uid="uid://87piyw5ciu0e" path="res://hrt_race/audio/sfx/chop3.wav" id="2_ikl1e"]
+[ext_resource type="PackedScene" uid="uid://dckwsa5s6a1ur" path="res://hrt_race/scenes/race_objects/horse_view.tscn" id="4_eci21"]
+
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_beeco"]
+random_pitch = 1.7817973
+streams_count = 1
+stream_0/stream = ExtResource("2_ikl1e")
+
+[node name="Horse" type="SGCharacterBody2D" unique_id=679903820 node_paths=PackedStringArray("_view")]
+collision_layer = 3
+script = ExtResource("1_4to3w")
+_view = NodePath("HorseView")
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="." unique_id=1220818124]
+stream = SubResource("AudioStreamRandomizer_beeco")
+volume_db = -4.078
+
+[node name="HorseView" parent="." unique_id=1624413055 instance=ExtResource("4_eci21")]

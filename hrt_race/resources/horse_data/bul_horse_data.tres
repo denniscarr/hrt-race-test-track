@@ -1,0 +1,33 @@
+[gd_resource type="Resource" script_class="HorseData" format=3 uid="uid://d3wgitggk8bb2"]
+
+[ext_resource type="AudioStream" uid="uid://b7qm4v28020vs" path="res://hrt_race/audio/sfx/horsenei.wav" id="1_e2fsq"]
+[ext_resource type="Texture2D" uid="uid://dc1y36yi14g24" path="res://hrt_race/sprites/horses/bullet/bul00.png" id="1_ti283"]
+[ext_resource type="Texture2D" uid="uid://qroympf6qqql" path="res://hrt_race/sprites/horses/bullet/bul02.png" id="2_e2fsq"]
+[ext_resource type="Texture2D" uid="uid://cwk611kwm2a5l" path="res://hrt_race/sprites/horses/bullet/bul04.png" id="3_yw66i"]
+[ext_resource type="Texture2D" uid="uid://pkbkbhn3a8hq" path="res://hrt_race/sprites/horses/bullet/bul06.png" id="4_x1c2x"]
+[ext_resource type="Texture2D" uid="uid://dyig2v2n6x4t1" path="res://hrt_race/sprites/horses/bullet/bul08.png" id="5_ehvvi"]
+[ext_resource type="Texture2D" uid="uid://cyjapvsl8cpt2" path="res://hrt_race/sprites/horses/bullet/bul10.png" id="6_jm5ur"]
+[ext_resource type="Texture2D" uid="uid://b8vno6niae5hv" path="res://hrt_race/sprites/horses/bullet/bul12.png" id="7_pimjw"]
+[ext_resource type="Texture2D" uid="uid://ctwt7gbfmgi7q" path="res://hrt_race/sprites/horses/bullet/bul14.png" id="8_xnn0t"]
+[ext_resource type="Texture2D" uid="uid://cjv4c8x2tcw5e" path="res://hrt_race/sprites/horses/bullet/bul16.png" id="9_6omo1"]
+[ext_resource type="Texture2D" uid="uid://dqi04ibiqycfo" path="res://hrt_race/sprites/horses/bullet/bul18.png" id="10_lsoc7"]
+[ext_resource type="Texture2D" uid="uid://bqb3s42e5ss07" path="res://hrt_race/sprites/horses/bullet/bul20.png" id="11_wghm5"]
+[ext_resource type="Texture2D" uid="uid://3o3ml5knkjtp" path="res://hrt_race/sprites/horses/bullet/bul22.png" id="12_4gxi1"]
+[ext_resource type="Texture2D" uid="uid://dwbji0up38j5y" path="res://hrt_race/sprites/horses/bullet/bul24.png" id="13_bo2xi"]
+[ext_resource type="Texture2D" uid="uid://boadvov4x63ws" path="res://hrt_race/sprites/horses/bullet/bul26.png" id="14_8pgmr"]
+[ext_resource type="Texture2D" uid="uid://c7q4lsfcwpets" path="res://hrt_race/sprites/horses/bullet/bul28.png" id="15_xqlvo"]
+[ext_resource type="Texture2D" uid="uid://c8sls5ym0ik82" path="res://hrt_race/sprites/horses/bullet/bul30.png" id="16_fu03w"]
+[ext_resource type="Texture2D" uid="uid://vwubqwbck808" path="res://hrt_race/sprites/horses/bullet/big_bul.png" id="17_1tb0a"]
+[ext_resource type="AudioStream" uid="uid://xi43r1tcgubc" path="res://hrt_race/audio/music/lexy/blue.wav" id="18_r66du"]
+[ext_resource type="Script" uid="uid://hfdiruxupk8j" path="res://hrt_race/scripts/horse_data.gd" id="19_lnw4s"]
+
+[resource]
+script = ExtResource("19_lnw4s")
+_name = "Bullet'n Board"
+_name_abv = "BUL"
+_textures = Array[Texture2D]([ExtResource("1_ti283"), ExtResource("2_e2fsq"), ExtResource("3_yw66i"), ExtResource("4_x1c2x"), ExtResource("5_ehvvi"), ExtResource("6_jm5ur"), ExtResource("7_pimjw"), ExtResource("8_xnn0t"), ExtResource("9_6omo1"), ExtResource("10_lsoc7"), ExtResource("11_wghm5"), ExtResource("12_4gxi1"), ExtResource("13_bo2xi"), ExtResource("14_8pgmr"), ExtResource("15_xqlvo"), ExtResource("16_fu03w")])
+_color = Color(0, 0, 1, 1)
+_victory_texture = ExtResource("17_1tb0a")
+_victory_theme = ExtResource("18_r66du")
+_start_dir = 4
+metadata/_custom_type_script = "uid://hfdiruxupk8j"
