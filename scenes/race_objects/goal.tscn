@@ -1,0 +1,13 @@
+[gd_scene format=3 uid="uid://bbpkyemxfsapi"]
+
+[ext_resource type="Script" uid="uid://cimf3t6cgbr6m" path="res://hrt_race/scripts/goal.gd" id="1_sx1j4"]
+[ext_resource type="Texture2D" uid="uid://buitt7iql5xov" path="res://hrt_race/sprites/general/goal_carrot.png" id="2_w3gav"]
+
+[node name="Goal" type="SGArea2D" unique_id=2137704683 node_paths=PackedStringArray("_sprite")]
+monitorable = false
+collision_layer = 0
+script = ExtResource("1_sx1j4")
+_sprite = NodePath("Sprite2D")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1528826803]
+texture = ExtResource("2_w3gav")
