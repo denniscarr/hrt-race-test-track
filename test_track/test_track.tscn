@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://c4t23m73gx6gw"]
 
 [ext_resource type="Script" uid="uid://dhrs6utafayew" path="res://test_track/test_track.gd" id="1_531do"]
-[ext_resource type="Script" uid="uid://crlsjvuwjepmk" path="res://hrt_race/scripts/horse_data.gd" id="2_ipgwl"]
+[ext_resource type="Script" uid="uid://dengf7jt7r00f" path="res://hrt_race/scripts/horse_data.gd" id="2_ipgwl"]
 [ext_resource type="PackedScene" uid="uid://bna5ntie8vds7" path="res://hrt_race/scenes/race_tracks/race_track_01.tscn" id="2_sskgu"]
 [ext_resource type="Resource" uid="uid://d3wgitggk8bb2" path="res://hrt_race/resources/horse_data/bul_horse_data.tres" id="3_8asp6"]
 [ext_resource type="PackedScene" uid="uid://br6el3g8twnpb" path="res://hrt_race/scenes/race_tracks/race_track_02.tscn" id="3_08qik"]
