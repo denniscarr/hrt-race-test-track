@@ -11,6 +11,8 @@ extends Resource
 ## counter-clockwise from tehre.
 @export var _textures: Array[Texture2D]
 
+@export var _textures_by_key: Dictionary[String, Texture2D]
+
 ## The horse's signature color. Used to color text on the victory screen (and maybe other stuff
 ## later)
 @export var _color: Color = Color.WHITE
@@ -47,6 +49,10 @@ var name: String:
 var textures: Array[Texture2D]:
 	get:
 		return _textures
+
+var textures_by_key: Dictionary[String, Texture2D]:
+	get:
+		return _textures_by_key
 
 ## The horse's signature color
 var color: Color:
