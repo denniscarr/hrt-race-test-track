@@ -9,7 +9,6 @@ extends Node2D
 ## Horse name abbreviation label for start of race
 @export var _name_label: Label
 
-
 var _horse_textures: Array[Texture2D] = []
 
 
@@ -25,7 +24,7 @@ func get_current_texture() -> Texture2D:
 
 ## Called to update the horses look direction from their horse data textures
 func set_look_direction(fixed_look_dir: SGFixedVector2):
-	var look_dir := Vector2(SGFixed.to_float(fixed_look_dir.x), SGFixed.to_float(fixed_look_dir.y))
+	var look_dir := fixed_look_dir.to_float()
 
 	# Only update if there is actual movement to prevent division by zero or default direction issues
 	if look_dir.length_squared() > 0:

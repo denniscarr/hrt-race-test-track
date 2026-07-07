@@ -50,7 +50,7 @@ func _ready():
 	pass
 
 
-func _physics_process(delta: float):
+func _physics_process(_delta: float):
 	_horses_bounced_off_this_tick.clear()
 
 	if not _is_moving:
@@ -68,6 +68,7 @@ func _physics_process(delta: float):
 	var collision := move_and_collide(velocity)
 	if collision:
 		var got_stuck = _bounce(collision.get_normal())
+		velocity = snap_to_possible_dir(velocity)
 
 		if got_stuck:
 			print("bounce fail")
@@ -77,8 +78,8 @@ func _physics_process(delta: float):
 			_check_horse_collision(collision)
 			_check_wall_collision(collision)
 
-		# Update look dir
-		_view.set_look_direction(velocity)
+	# Update look dir
+	_view.set_look_direction(velocity)
 
 
 ## Initializes the horse. Call right after instantiating it.
@@ -118,6 +119,7 @@ func get_direction_degrees(horse: Horse):
 func set_direction(fixed_degrees: int):
 	var radians := SGFixed.deg_to_rad(fixed_degrees)
 	velocity = velocity.rotated(radians)
+	velocity = snap_to_possible_dir(velocity)
 	_view.set_look_direction(velocity)
 
 
@@ -133,11 +135,13 @@ func randomize_direction():
 	var randomness := SGFixed.deg_to_rad(SGFixed.ONE * 360)
 	var rand_angle := randi_range(-randomness, randomness)
 	velocity = velocity.rotated(rand_angle)
+	velocity = snap_to_possible_dir(velocity)
 	_view.set_look_direction(velocity)
 
 
 func reverse_direction():
 	velocity = velocity.rotated(SGFixed.deg_to_rad(SGFixed.ONE * 180))
+	velocity = snap_to_possible_dir(velocity)
 	_view.set_look_direction(velocity)
 
 
@@ -171,17 +175,54 @@ func get_current_speed_lossy() -> float:
 	return SGFixed.to_float(velocity.length())
 
 
+## Call from another horse when it bumps into this horse
 func hit_by_other_horse(other_horse: Horse, collision_normal: SGFixedVector2):
+	# Makee sure we don't bounce off the same horse more than once per tick
 	if _horses_bounced_off_this_tick.has(other_horse):
 		return
 
 	_horses_bounced_off_this_tick.push_back(other_horse)
 
+	# Have this horse bounce off the collision normal in a specific way that prevents the
+	# two horses from getting locked together
 	var opposite_normal := collision_normal.mul(-1)
 	var to_other := fixed_position.sub(other_horse.fixed_position)
 	to_other = to_other.normalized()
 	velocity = to_other
 	_bounce(opposite_normal)
+
+
+## A "horse_dir" is a number between 0 and 32, where 0 = right and it increases clockwise.
+## These correspond to the 32 possible directions in Clickteam's animation editor. Blake based
+## the original HRT videos on a constraint where horses can only move in 32 possible directions,
+## each corresponding to an eye direction.
+static func fixed_dir_to_horse_dir(fixed_dir: SGFixedVector2) -> int:
+	var a := fixed_dir.angle()
+	var step_size := SGFixed.div(SGFixed.PI * 2, 32 * SGFixed.ONE)
+	var penis := SGFixed.div(a, step_size)
+	# penis = SGFixed.mul(penis, SGFixed.NEG_ONE)
+	var rounded_penis := SGFixed.round(penis)
+	var horse_dir = SGFixed.to_int(rounded_penis)
+	# print(wrapi(horse_dir, 0, 33))
+	return wrapi(horse_dir, 0, 33)
+
+
+## Converts a "horse_dir" (int btwn 0 and 32) to a fixed vector2 dir where 0 = right, increasing
+## clockwise.
+static func horse_dir_to_fixed_dir(horse_dir: int) -> SGFixedVector2:
+	var pi_thing := SGFixed.div(SGFixed.PI * 2, 32 * SGFixed.ONE)  # 1/32nd of 2PI
+	var r := SGFixed.mul(horse_dir * SGFixed.ONE, pi_thing)
+	# print(rad_to_deg(SGFixed.to_float(r)))
+	var fixed_dir := SGFixedVector2.right().rotated(r)
+	return fixed_dir
+
+
+## Snaps fixed_dir to the nearest "allowed" movement dir, ie one that corresponds to one of the
+## average horse's 32 eye directions.
+static func snap_to_possible_dir(fixed_dir: SGFixedVector2) -> SGFixedVector2:
+	var horse_dir := fixed_dir_to_horse_dir(fixed_dir)
+	var snapped_dir := horse_dir_to_fixed_dir(horse_dir)
+	return snapped_dir
 
 
 ## Called when the horse collides with something to make it bounce in another direction
@@ -202,8 +243,8 @@ func _bounce(collision_normal: SGFixedVector2, attempts: int = 0) -> bool:
 	velocity = rand_bounce_dir.mul(_fixed_move_speed).mul(_fixed_fx_speed_multiplier)
 
 	# Move just a smidge and check if we immediately hit another collider
-	# TODO: This was originally used the 'test' param from the native GD function.
-	# SGPhysics doesn't have that. How did I handle this in Smush?
+	# NOTE: This was originally used the 'test' param from the native GD move_and_collide.
+	# SGPhysics doesn't have that, so we are actually moving the horse. Seems to work fine...
 	var collision := move_and_collide(velocity)
 	if collision:
 		# If we did, bounce again using the normal from that collision
@@ -216,15 +257,10 @@ func _bounce(collision_normal: SGFixedVector2, attempts: int = 0) -> bool:
 
 ## Returns the direction that the horse should move in at the start of the race
 func _get_start_dir() -> SGFixedVector2:
-	var fixed_start_dir: int = horse_data.start_dir
-	# 32 is the number of possible starting directions in the clickteam version
-	var pi_thing := SGFixed.div(SGFixed.PI * 2, 32)
-	var r := SGFixed.mul(-fixed_start_dir, pi_thing)
-	var start_dir := SGFixedVector2.right().rotated(r)
-	return start_dir
+	return horse_dir_to_fixed_dir(horse_data.start_dir)
 
 
-## Checks the specified collision is with another horse and if so registers it with the BetEventBus
+## Checks if the specified collision is with another horse and if so emits an event
 func _check_horse_collision(p_collision: SGKinematicCollision2D):
 	var collider = p_collision.get_collider()
 	if collider is Horse:
@@ -235,6 +271,7 @@ func _check_horse_collision(p_collision: SGKinematicCollision2D):
 		hit_horse.emit(self, horse)
 
 
+## Checks if the specified collision is with a wall, and if so emits an event
 func _check_wall_collision(p_collision: SGKinematicCollision2D):
 	# "LevelWall" is added to the data property of the wall colliders when they're created in
 	# level_collision.gd
