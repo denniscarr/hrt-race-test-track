@@ -1,0 +1,34 @@
+[gd_resource type="Resource" script_class="HorseData" format=3 uid="uid://bx8sw30b3g7g"]
+
+[ext_resource type="AudioStream" uid="uid://b7qm4v28020vs" path="res://hrt_race/audio/sfx/horsenei.wav" id="1_uh44t"]
+[ext_resource type="Texture2D" uid="uid://fjlotyrgn8vh" path="res://hrt_race/sprites/horses/doorknob/knb00.png" id="1_y4jia"]
+[ext_resource type="Texture2D" uid="uid://bcvqksqbxy7ir" path="res://hrt_race/sprites/horses/doorknob/knb02.png" id="2_uh44t"]
+[ext_resource type="Texture2D" uid="uid://cba2mquvmctqd" path="res://hrt_race/sprites/horses/doorknob/knb04.png" id="3_pijpq"]
+[ext_resource type="Texture2D" uid="uid://bymmusohn71c8" path="res://hrt_race/sprites/horses/doorknob/knb06.png" id="4_0wioc"]
+[ext_resource type="Texture2D" uid="uid://chtisgwrsmq3r" path="res://hrt_race/sprites/horses/doorknob/knb08.png" id="5_vvxhu"]
+[ext_resource type="Texture2D" uid="uid://c2fgyslue5fbi" path="res://hrt_race/sprites/horses/doorknob/knb10.png" id="6_vpxt4"]
+[ext_resource type="Texture2D" uid="uid://ptqy2hykbkgb" path="res://hrt_race/sprites/horses/doorknob/knb12.png" id="7_lsj4q"]
+[ext_resource type="Texture2D" uid="uid://bli41cjbwlvll" path="res://hrt_race/sprites/horses/doorknob/knb14.png" id="8_hi6ji"]
+[ext_resource type="Texture2D" uid="uid://bjsri1counktg" path="res://hrt_race/sprites/horses/doorknob/knb16.png" id="9_8wxr1"]
+[ext_resource type="Texture2D" uid="uid://cknhwgobyawj7" path="res://hrt_race/sprites/horses/doorknob/knb18.png" id="10_ok6ft"]
+[ext_resource type="Texture2D" uid="uid://delg324o13mqk" path="res://hrt_race/sprites/horses/doorknob/knb20.png" id="11_wkltd"]
+[ext_resource type="Texture2D" uid="uid://cu4iww5eesfpt" path="res://hrt_race/sprites/horses/doorknob/knb22.png" id="12_phk3g"]
+[ext_resource type="Texture2D" uid="uid://c33ae4wy7ysn2" path="res://hrt_race/sprites/horses/doorknob/knb24.png" id="13_ihv2w"]
+[ext_resource type="Texture2D" uid="uid://bpdvn7q2ysdys" path="res://hrt_race/sprites/horses/doorknob/knb26.png" id="14_a1mbj"]
+[ext_resource type="Texture2D" uid="uid://byi7asv0n22cy" path="res://hrt_race/sprites/horses/doorknob/knb28.png" id="15_ouny7"]
+[ext_resource type="Texture2D" uid="uid://bq4evp73gdf1j" path="res://hrt_race/sprites/horses/doorknob/knb30.png" id="16_638mk"]
+[ext_resource type="Texture2D" uid="uid://ckuu0vsj13ee2" path="res://hrt_race/sprites/horses/doorknob/knb32.png" id="17_2wd2r"]
+[ext_resource type="Texture2D" uid="uid://bmhxrqvkybvqj" path="res://hrt_race/sprites/horses/doorknob/big_knb.png" id="18_5tx2e"]
+[ext_resource type="Script" uid="uid://hfdiruxupk8j" path="res://hrt_race/scripts/horse_data.gd" id="19_5tx2e"]
+[ext_resource type="AudioStream" uid="uid://8e0igw4rxfw6" path="res://hrt_race/audio/music/lexy/door_knob.wav" id="19_v8tt6"]
+
+[resource]
+script = ExtResource("19_5tx2e")
+_name = "Door Knob"
+_name_abv = "KNB"
+_textures = Array[Texture2D]([ExtResource("1_y4jia"), ExtResource("2_uh44t"), ExtResource("3_pijpq"), ExtResource("4_0wioc"), ExtResource("5_vvxhu"), ExtResource("6_vpxt4"), ExtResource("7_lsj4q"), ExtResource("8_hi6ji"), ExtResource("9_8wxr1"), ExtResource("10_ok6ft"), ExtResource("11_wkltd"), ExtResource("12_phk3g"), ExtResource("13_ihv2w"), ExtResource("14_a1mbj"), ExtResource("15_ouny7"), ExtResource("16_638mk"), ExtResource("17_2wd2r")])
+_color = Color(0.37254903, 0.12156863, 0.09019608, 1)
+_victory_texture = ExtResource("18_5tx2e")
+_victory_theme = ExtResource("19_v8tt6")
+_start_dir = 2
+metadata/_custom_type_script = "uid://hfdiruxupk8j"

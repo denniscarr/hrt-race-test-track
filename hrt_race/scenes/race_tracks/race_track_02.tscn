@@ -1,0 +1,146 @@
+[gd_scene format=3 uid="uid://br6el3g8twnpb"]
+
+[ext_resource type="PackedScene" uid="uid://dpk7vdlwd671d" path="res://hrt_race/scenes/race_tracks/race_track_base.tscn" id="1_8b2kk"]
+[ext_resource type="Shader" uid="uid://661o74uwcvb4" path="res://hrt_race/shaders/mask.gdshader" id="2_dhlve"]
+[ext_resource type="Texture2D" uid="uid://du5poc55uu0e8" path="res://hrt_race/sprites/levels/map002.png" id="3_8b2kk"]
+[ext_resource type="Texture2D" uid="uid://xqg8yx4vkf03" path="res://hrt_race/sprites/ui/screen_transition_mask_02.png" id="4_654ak"]
+[ext_resource type="AudioStream" uid="uid://bndtyp6dr8ot5" path="res://hrt_race/audio/music/anibal/horse_epic.wav" id="5_dhlve"]
+
+[sub_resource type="Shader" id="Shader_sfmk3"]
+code = "/*
+Mutli-purpose shader with a couple of masking effects.
+*/
+shader_type canvas_item;
+
+// Used with the alpha test effect. Pixels with their alpha value below this
+// will be masked out.
+uniform float alpha_test_cutoff : hint_range(0.0, 1.0) = 0.5;
+
+// The texture used for the alpha test masking.
+uniform sampler2D alpha_test : hint_default_transparent, filter_nearest;
+
+// If you set a texture here, it will be superimposed on top of all
+// non-transparent pixels in the main shader.
+uniform sampler2D mask : hint_default_transparent, filter_nearest;
+
+void vertex() {}
+
+void fragment() {
+	// Handle alpha test
+	if (texture(alpha_test, UV).r > alpha_test_cutoff) {
+		COLOR.a = 0.0;
+	}
+	else {
+		vec4 mask_pixel = texture(mask, UV);
+		vec4 tex_pixel = texture(TEXTURE, UV);
+		
+		// Pure green = show the original image
+		if (mask_pixel.a > 0.0) {
+			COLOR = mask_pixel;
+			COLOR.a = tex_pixel.a;
+		}
+		else {
+			COLOR = texture(TEXTURE, UV);
+		}
+	}
+}
+"
+
+[sub_resource type="Gradient" id="Gradient_sfmk3"]
+offsets = PackedFloat32Array(0.0056497175, 1)
+colors = PackedColorArray(0, 0, 0, 1, 0.86179286, 0.7545456, 0.5216045, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_654ak"]
+gradient = SubResource("Gradient_sfmk3")
+fill_from = Vector2(0, 1)
+fill_to = Vector2(1, 1)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_drqbt"]
+resource_local_to_scene = true
+shader = SubResource("Shader_sfmk3")
+shader_parameter/alpha_test_cutoff = 1.0
+shader_parameter/alpha_test = ExtResource("4_654ak")
+shader_parameter/mask = SubResource("GradientTexture2D_654ak")
+
+[sub_resource type="Gradient" id="Gradient_v45ci"]
+colors = PackedColorArray(0.5921569, 0.53333336, 0.039215688, 1, 0.84705883, 0.7019608, 0.5372549, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_48ne7"]
+gradient = SubResource("Gradient_v45ci")
+
+[sub_resource type="Gradient" id="Gradient_48ne7"]
+colors = PackedColorArray(0, 0.49803922, 0, 1, 0, 1, 0, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_6xh4u"]
+gradient = SubResource("Gradient_48ne7")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_dhlve"]
+shader = ExtResource("2_dhlve")
+shader_parameter/alpha_test_cutoff = 0.5
+shader_parameter/mask = SubResource("GradientTexture2D_6xh4u")
+
+[node name="RaceTrack02" unique_id=1781944767 instance=ExtResource("1_8b2kk")]
+
+[node name="Background" parent="." index="1" unique_id=1994129123]
+material = SubResource("ShaderMaterial_drqbt")
+texture = SubResource("GradientTexture2D_48ne7")
+
+[node name="WallSprite" parent="." index="2" unique_id=1549821729]
+material = SubResource("ShaderMaterial_dhlve")
+texture = ExtResource("3_8b2kk")
+
+[node name="Node2D" type="SGFixedNode2D" parent="SpawnPoints" parent_id_path=PackedInt32Array(1788382203) index="0" unique_id=793536336]
+fixed_position_x = -16973824
+fixed_position_y = -12713984
+position = Vector2(-259, -194)
+
+[node name="Node2D3" type="SGFixedNode2D" parent="SpawnPoints" parent_id_path=PackedInt32Array(1788382203) index="1" unique_id=1518600607]
+fixed_position_x = -14811136
+fixed_position_y = -10551296
+position = Vector2(-226, -161)
+
+[node name="Node2D4" type="SGFixedNode2D" parent="SpawnPoints" parent_id_path=PackedInt32Array(1788382203) index="2" unique_id=756230272]
+fixed_position_x = -17301504
+fixed_position_y = -8847360
+position = Vector2(-264, -135)
+
+[node name="Node2D5" type="SGFixedNode2D" parent="SpawnPoints" parent_id_path=PackedInt32Array(1788382203) index="3" unique_id=282950102]
+fixed_position_x = -12713984
+fixed_position_y = -12124160
+position = Vector2(-194, -185)
+
+[node name="Node2D7" type="SGFixedNode2D" parent="SpawnPoints" parent_id_path=PackedInt32Array(1788382203) index="4" unique_id=596703956]
+fixed_position_x = -10944512
+fixed_position_y = -9502720
+position = Vector2(-167, -145)
+
+[node name="Node2D9" type="SGFixedNode2D" parent="SpawnPoints" parent_id_path=PackedInt32Array(1788382203) index="5" unique_id=454645555]
+fixed_position_x = -12582912
+fixed_position_y = -6881280
+position = Vector2(-192, -105)
+
+[node name="Node2D6" type="SGFixedNode2D" parent="SpawnPoints" parent_id_path=PackedInt32Array(1788382203) index="6" unique_id=934445307]
+fixed_position_x = -15859712
+fixed_position_y = -6160384
+position = Vector2(-242, -94)
+
+[node name="Gate" parent="GateHolder" parent_id_path=PackedInt32Array(653756875) index="0" unique_id=310014164]
+position = Vector2(-124.41176, -157.04109)
+scale = Vector2(1.8235294, 1.0821916)
+
+[node name="Goal" parent="GoalHolder" parent_id_path=PackedInt32Array(1830968679) index="0" unique_id=1045274017]
+fixed_position_x = -2228224
+fixed_position_y = 917504
+position = Vector2(-34, 14)
+
+[node name="AudioStreamPlayer2D" parent="." index="8" unique_id=1623793595]
+stream = ExtResource("5_dhlve")
+
+[node name="LevelText" parent="." index="11" unique_id=2140136208]
+offset_left = 211.0
+offset_top = -46.0
+offset_right = 286.0
+offset_bottom = -23.0
+
+[node name="RaceClock" parent="." index="12" unique_id=972776598]
+position = Vector2(-133, -88)
