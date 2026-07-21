@@ -43,6 +43,8 @@ var _speed_increases: int = 0
 
 var _horses_bounced_off_this_tick: Array[Horse]
 
+var _physics_rng: RandomNumberGenerator
+
 @onready var _audio_player = $AudioStreamPlayer2D
 
 
@@ -83,7 +85,12 @@ func _physics_process(_delta: float):
 
 
 ## Initializes the horse. Call right after instantiating it.
-func initialize(data: HorseData):
+func initialize(data: HorseData, physics_rng: RandomNumberGenerator = null):
+	if physics_rng:
+		_physics_rng = physics_rng
+	else:
+		_physics_rng = RandomNumberGenerator.new()
+
 	_horse_data = data
 
 	_view.initialize(data)
@@ -133,7 +140,7 @@ func set_direction_lossy(degrees: float):
 ## Gives the horse a completely random direction
 func randomize_direction():
 	var randomness := SGFixed.deg_to_rad(SGFixed.ONE * 360)
-	var rand_angle := randi_range(-randomness, randomness)
+	var rand_angle := _physics_rng.randi_range(-randomness, randomness)
 	velocity = velocity.rotated(rand_angle)
 	velocity = snap_to_possible_dir(velocity)
 	_view.set_look_direction(velocity)
@@ -235,7 +242,7 @@ func _bounce(collision_normal: SGFixedVector2, attempts: int = 0) -> bool:
 
 	# Get a bounce direction by applying a random rotation to the base bounce
 	var randomness := SGFixed.deg_to_rad(horse_data.bounce_randomness)
-	var rand_angle := randi_range(-randomness, randomness)
+	var rand_angle := _physics_rng.randi_range(-randomness, randomness)
 	var base_bounce_dir := velocity.bounce(collision_normal).normalized()
 	var rand_bounce_dir := base_bounce_dir.rotated(rand_angle)
 

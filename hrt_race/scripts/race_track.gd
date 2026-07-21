@@ -52,6 +52,13 @@ enum State { IDLE, COUNTDOWN, RACE, VICTORY }
 ## Time scale to be applied to all gameplay stuff. Meant to be used during QTEs or hitpause.
 var time_scale: int = SGFixed.ONE
 
+## The random number generator used for all deterministic stuff.
+## If you extend any of the game objects and add your own rng, make sure that you use this one
+## to preserve determinism and *dont* use it for anything that is not deterministic.
+var determ_rng: RandomNumberGenerator:
+	get:
+		return _determ_rng
+
 var current_state: State:
 	get:
 		return _current_state
@@ -94,6 +101,9 @@ var _current_state: State = State.IDLE
 var _race_cam: Camera2D
 
 var _race_cam_tween: Tween
+
+## Should be used for all deterministic randomness
+@onready var _determ_rng := RandomNumberGenerator.new()
 
 
 func _ready():
@@ -221,11 +231,10 @@ func get_horse_by_name(horse_name: String) -> Horse:
 
 ## Creates all horses in a random order at random spawn points
 func _spawn_horses(horse_datas: Array[HorseData]):
-	var shuffled_horses := horse_datas.duplicate()
-	shuffled_horses.shuffle()
+	var shuffled_horses := RandUtil.shuffle_with_rng(horse_datas, _determ_rng)
 
-	var shuffled_spawn_points := _spawn_point_holder.get_children()
-	shuffled_spawn_points.shuffle()
+	var spawn_points := _spawn_point_holder.get_children()
+	var shuffled_spawn_points := RandUtil.shuffle_with_rng(spawn_points, _determ_rng)
 
 	# Spawn horses
 	for i: int in range(0, shuffled_horses.size()):
@@ -237,7 +246,7 @@ func _spawn_horses(horse_datas: Array[HorseData]):
 
 		var new_horse := _horse_packed_scene.instantiate() as Horse
 		$HorseHolder.add_child(new_horse)
-		new_horse.initialize(horse_data)
+		new_horse.initialize(horse_data, determ_rng)
 		_horses.push_back(new_horse)
 		_horse_by_name[horse_data.name_abrev] = new_horse
 
