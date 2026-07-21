@@ -3,6 +3,8 @@ extends Node
 @export var _horses: Array[HorseData]
 @export var _race_scenes: Array[PackedScene]
 @export var _num_horses_in_race: int = 7
+## Random seed. Set to 0 to use pure randomness.
+@export var _seed: int = 0
 
 var _race_track: RaceTrack
 
@@ -10,6 +12,10 @@ var _race_track: RaceTrack
 
 
 func _ready() -> void:
+	if _seed != 0:
+		print(_seed)
+		seed(_seed)
+
 	# Pick horses at random
 	var horse_bag := _horses.duplicate()
 	horse_bag.shuffle()
@@ -23,6 +29,9 @@ func _ready() -> void:
 	# Pick a race track at random
 	_race_track = _race_scenes.pick_random().instantiate() as RaceTrack
 	add_child(_race_track)
+
+	if _seed != 0:
+		_race_track.determ_rng.seed = _seed
 
 	_race_track.set_race_cam(_cam)
 	_race_track.initialize(horses)
