@@ -100,7 +100,12 @@ func _define_countdown_state(index: int):
 
 	state.process_callback = func(delta: float):
 		_timer += delta
-		if _timer >= _min_phase_time and not _audio_player.playing:
+		var audio_finished := (
+			_timer >= _audio_player.stream.get_length()
+			if _audio_player.stream != null
+			else _timer >= 2.0 # failsafe
+		)
+		if _timer >= _min_phase_time and audio_finished:
 			_go_to_next_phase()
 
 	return state
