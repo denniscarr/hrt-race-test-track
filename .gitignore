@@ -15,3 +15,5 @@ export_credentials.cfg
 *.translation
 
 *.tmp
+
+.DS_Store
